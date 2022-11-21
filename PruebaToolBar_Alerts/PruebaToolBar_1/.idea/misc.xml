@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/usuario/AndroidStudioProjects/PruebaToolBar_1/PruebaToolBar_1/app/src/main/res/layout/activity_main.xml" value="0.1381340579710145" />
+        <entry key="..\:/Users/usuario/AndroidStudioProjects/PruebaToolBar_Alerts/PruebaToolBar_1/app/src/main/res/layout/activity_formulario_add_posicion.xml" value="0.151268115942029" />
+        <entry key="..\:/Users/usuario/AndroidStudioProjects/PruebaToolBar_Alerts/PruebaToolBar_1/app/src/main/res/layout/activity_formulario_add_profesor.xml" value="0.17889492753623187" />
+        <entry key="..\:/Users/usuario/AndroidStudioProjects/PruebaToolBar_Alerts/PruebaToolBar_1/app/src/main/res/layout/activity_main.xml" value="0.17889492753623187" />
+        <entry key="..\:/Users/usuario/AndroidStudioProjects/PruebaToolBar_Alerts/PruebaToolBar_1/app/src/main/res/layout/toolbar.xml" value="0.17889492753623187" />
+        <entry key="..\:/Users/usuario/AndroidStudioProjects/PruebaToolBar_Alerts/PruebaToolBar_1/app/src/main/res/menu/menu2.xml" value="0.19947916666666668" />
+        <entry key="..\:/Users/usuario/AndroidStudioProjects/PruebaToolBar_Alerts/PruebaToolBar_1/app/src/main/res/menu/menu_toolbar.xml" value="0.25" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.MainActivity">
+    <item
+        android:id="@+id/add_posiciones"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orderInCategory="50"
+        android:title="Añadir posiciones"
+        app:showAsAction="collapseActionView" />
+    <item
+        android:id="@+id/editar_posiciones"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orderInCategory="50"
+        android:title="Editar posiciones"
+        app:showAsAction="collapseActionView" />
+    <item
+        android:id="@+id/eliminar_posiciones"
+        android:orderInCategory="50"
+        android:title="Eliminar posiciones"
+        app:showAsAction="collapseActionView" />
+    <item
+        android:id="@+id/ver_posiciones"
+        android:orderInCategory="100"
+        app:showAsAction="collapseActionView"
+        android:title="Ver posiciones" />
+
+
+
+</menu>
