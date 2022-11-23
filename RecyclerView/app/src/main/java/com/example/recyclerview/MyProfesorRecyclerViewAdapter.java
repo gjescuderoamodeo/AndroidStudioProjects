@@ -42,7 +42,7 @@ public class MyProfesorRecyclerViewAdapter extends RecyclerView.Adapter<MyProfes
 
         //asignamos el objeto del modelo a los componentes visuales
 
-        //holder
+        //holder.foto
         holder.textViewNombre.setText(profesor.getNombre());
         holder.textViewHorasLectivas.setText("Horas lectivas: " + profesor.getHoras_lectivas());
         if(profesor.isMayor_55()){
