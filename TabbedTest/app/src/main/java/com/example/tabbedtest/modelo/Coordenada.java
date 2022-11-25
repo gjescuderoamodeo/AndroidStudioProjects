@@ -11,6 +11,10 @@ public class Coordenada {
         this.y = y;
     }
 
+    public Coordenada() {
+    }
+
+
     public int getX() {
         return x;
     }
@@ -25,5 +29,13 @@ public class Coordenada {
 
     public void setY(int y) {
         this.y = y;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 }
