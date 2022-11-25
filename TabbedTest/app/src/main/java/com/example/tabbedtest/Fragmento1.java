@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -62,7 +63,11 @@ public class Fragmento1 extends Fragment {
         return inflater.inflate(R.layout.fragment_fragmento1, container, false);
     }
 
-    public void pulsar(){
+    public void addCoordenada(View view){
+        TextView x = ((TextView) view.findViewById(R.id.x));
+        TextView y = ((TextView) view.findViewById(R.id.x));
+        TextView nombre = ((TextView) view.findViewById(R.id.x));
 
+        //seguir con esto
     }
 }
