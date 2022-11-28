@@ -1,5 +1,6 @@
 package com.example.tabbedtest;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,6 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.tabbedtest.DaosSQLite.Dao;
+import com.example.tabbedtest.DaosSQLite.DaoCoordenadaSQL;
+import com.example.tabbedtest.DaosSQLite.GestionCoordenadaBD;
+import com.example.tabbedtest.modelo.Coordenada;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,6 +31,7 @@ public class Fragmento1 extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    DaoCoordenadaSQL daocod;
 
     public Fragmento1() {
         // Required empty public constructor
@@ -53,6 +61,7 @@ public class Fragmento1 extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+            daocod=new DaoCoordenadaSQL();
         }
     }
 
@@ -64,10 +73,14 @@ public class Fragmento1 extends Fragment {
     }
 
     public void addCoordenada(View view){
-        TextView x = ((TextView) view.findViewById(R.id.x));
-        TextView y = ((TextView) view.findViewById(R.id.x));
-        TextView nombre = ((TextView) view.findViewById(R.id.x));
+        String x = ((TextView) view.findViewById(R.id.x)).getText().toString();
+        String y = ((TextView) view.findViewById(R.id.y)).getText().toString();
+        String nombre = ((TextView) view.findViewById(R.id.name)).getText().toString();
 
-        //seguir con esto
+        //Enviar datos al activity main
+
+        //this.daocod.crearCoordenada(new Coordenada(Integer.parseInt(x),Integer.parseInt(y),nombre));
+        //Toast.makeText(this,"Ajustes guardados", Toast.LENGTH_SHORT).show();
+        System.out.println(x);
     }
 }

@@ -6,9 +6,10 @@ public class Coordenada {
     private int y;
     private String nombre;
 
-    public Coordenada(int x, int y) {
+    public Coordenada(int x, int y, String nombre) {
         this.x = x;
         this.y = y;
+        this.nombre=nombre;
     }
 
     public Coordenada() {

@@ -5,7 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class GestionCoordenadaBD extends SQLiteOpenHelper  {
-    String sqlCreate1="CREATE TABLE Coordenada (idDep INTEGER PRIMARY KEY AUTOINCREMENT,nombre TEXT, x INTEGER, y INTEGER)";
+    String sqlCreate1="CREATE TABLE Coordenada (nombre TEXT PRIMARY KEY, x INTEGER, y INTEGER)";
     //String sqlCreate2="CREATE TABLE Profesores (idPro INTEGER PRIMARY KEY AUTOINCREMENT,  departamento INTEGER, nombre TEXT,observaciones TEXT,  FOREIGN KEY (departamento) REFERENCES Departamentos (idDep))";
     //Al guardar en profesores hay que ejecutar SQL="PRAGMA foreign_keys=ON"
 

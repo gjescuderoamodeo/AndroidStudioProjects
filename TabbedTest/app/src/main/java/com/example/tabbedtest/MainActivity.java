@@ -1,6 +1,10 @@
 package com.example.tabbedtest;
 
 import android.os.Bundle;
+
+import com.example.tabbedtest.DaosSQLite.Dao;
+import com.example.tabbedtest.DaosSQLite.DaoCoordenadaSQL;
+import com.example.tabbedtest.DaosSQLite.GestionCoordenadaBD;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
@@ -28,5 +32,8 @@ private ActivityMainBinding binding;
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = binding.tabs;
         tabs.setupWithViewPager(viewPager);
+
+        Dao.setGestorBD(new GestionCoordenadaBD(this));
+        //DaoCoordenadaSQL daocod=new DaoCoordenadaSQL();
     }
 }

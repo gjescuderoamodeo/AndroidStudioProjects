@@ -10,9 +10,9 @@ public class BDEstaticaCoordenada {
         this.coordenadas = coordenadas;
     }
     public BDEstaticaCoordenada() {
-        coordenadas.add(new Coordenada(0,10));
-        coordenadas.add(new Coordenada(11,20));
-        coordenadas.add(new Coordenada(21,30));
+       // coordenadas.add(new Coordenada(0,10));
+       // coordenadas.add(new Coordenada(11,20));
+       // coordenadas.add(new Coordenada(21,30));
 
     }
 
