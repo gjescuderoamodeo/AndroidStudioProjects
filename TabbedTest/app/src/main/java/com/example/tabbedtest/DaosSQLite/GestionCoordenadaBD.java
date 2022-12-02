@@ -12,7 +12,7 @@ public class GestionCoordenadaBD extends SQLiteOpenHelper  {
    public GestionCoordenadaBD(Context context)
    {
 
-       super(context,"BDDepartamentos2",null,1);
+       super(context,"BDCoordenada",null,1);
 
 
    }
