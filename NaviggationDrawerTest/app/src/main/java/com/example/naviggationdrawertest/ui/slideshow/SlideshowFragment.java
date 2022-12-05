@@ -12,13 +12,14 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.naviggationdrawertest.databinding.FragmentSlideshowBinding;
 
+//https://developer.android.com/guide/navigation/navigation-swipe-view-2#java
 public class SlideshowFragment extends Fragment {
 
     private FragmentSlideshowBinding binding;
 
     //private ViewPager2 vieesPager2;
     //Tablayaut
-    //PagerAdapter2
+    //PagerAdapter2 //Es una clase dentro de slideshow
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -30,11 +31,21 @@ public class SlideshowFragment extends Fragment {
         View root = binding.getRoot();
 
         //referencia viewpager2 ; binding.viewPager2
-        //pagerAdapter 2 //lo de las pestañas
+        //pagerAdapter2=new pagerAdapter2(this.getActivity() )//lo de las pestañas
+        //viewpager2.setAdapter(pagerAdapter2)
+
+        //tabs=binding.tabs
+
+        //new TabLayautMediator(tabs,viewPager2,(tab,posicion)->{
+        // if(position==0)tab.setText("");
+        // if(position==0)...
+        // }).attach
+
+        //final TextView textView = binding.textSlideshow;
+        //slideshowViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 
 
-        final TextView textView = binding.textSlideshow;
-        slideshowViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+
         return root;
     }
 
