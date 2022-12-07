@@ -4,22 +4,26 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.naviggationdrawertest.databinding.FragmentSlideshowBinding;
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 
 //https://developer.android.com/guide/navigation/navigation-swipe-view-2#java
 public class SlideshowFragment extends Fragment {
 
     private FragmentSlideshowBinding binding;
 
-    //private ViewPager2 vieesPager2;
-    //Tablayaut
-    //PagerAdapter2 //Es una clase dentro de slideshow
+    private ViewPager2 viewPager2;
+    private TabLayout tabs;
+    private PageAdapter2 pageAdapter2; //Es una clase dentro de slideshow
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -30,17 +34,19 @@ public class SlideshowFragment extends Fragment {
         binding = FragmentSlideshowBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        //referencia viewpager2 ; binding.viewPager2
-        //pagerAdapter2=new pagerAdapter2(this.getActivity() )//lo de las pestañas
-        //viewpager2.setAdapter(pagerAdapter2)
+        //referencia
+        viewPager2 = binding.viewPager2;
+        pageAdapter2=new PageAdapter2(this.getActivity());//lo de las pestañas
+        viewPager2.setAdapter(pageAdapter2);
 
-        //tabs=binding.tabs
+        tabs=binding.tabs;
 
-        //new TabLayautMediator(tabs,viewPager2,(tab,posicion)->{
-        // if(position==0)tab.setText("");
-        // if(position==0)...
-        // }).attach
+        new TabLayoutMediator(tabs,viewPager2,(tab, position)->{
+         if(position==0)tab.setText("");
+         if(position==1)tab.setText("panel2");
+        }).attach();
 
+        //no hace falta
         //final TextView textView = binding.textSlideshow;
         //slideshowViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 

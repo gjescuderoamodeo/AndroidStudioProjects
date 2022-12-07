@@ -23,12 +23,24 @@ public class PageAdapter2 extends FragmentStateAdapter {
         // Our object is just an integer :-P
         args.putInt(DemoObjectFragment.ARG_OBJECT, position + 1);
         fragment.setArguments(args);
-        return fragment;
+
+        switch(position){
+            //case 0
+
+            //case1
+                //return new Fragment2()
+        }
+
+
+
+
+
+        return null;
 
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return 2;
     }
 }
