@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
+import com.example.naviggationdrawertest.ui.home.HomeFragment;
+
 public class PageAdapter2 extends FragmentStateAdapter {
 
 
@@ -25,10 +27,10 @@ public class PageAdapter2 extends FragmentStateAdapter {
         fragment.setArguments(args);
 
         switch(position){
-            //case 0
-
-            //case1
-                //return new Fragment2()
+            case 0:
+                return new HomeFragment();
+            case 1:
+                return new HomeFragment();
         }
 
 

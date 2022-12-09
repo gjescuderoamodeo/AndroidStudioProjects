@@ -42,7 +42,7 @@ public class SlideshowFragment extends Fragment {
         tabs=binding.tabs;
 
         new TabLayoutMediator(tabs,viewPager2,(tab, position)->{
-         if(position==0)tab.setText("");
+         if(position==0)tab.setText("panel1");
          if(position==1)tab.setText("panel2");
         }).attach();
 
