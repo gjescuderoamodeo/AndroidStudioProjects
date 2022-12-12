@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,6 +55,8 @@ public class add_alimentos extends Fragment {
         return fragment;
     }
 
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,10 +70,28 @@ public class add_alimentos extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_add_alimentos,
+                container, false);
+        Button button = (Button) view.findViewById(R.id.añadir);
+        button.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                String kcal = ((TextView) view.findViewById(R.id.kcal)).getText().toString();
+                String nombre = ((TextView) view.findViewById(R.id.nombre)).getText().toString();
+
+
+                alimentos.add(new Alimento(Integer.parseInt(kcal),nombre));
+                System.out.println("Alimentos: " + alimentos);
+            }
+        });
+        //return view;
+
         return inflater.inflate(R.layout.fragment_add_alimentos, container, false);
     }
 
-    public void addAlimento(View view){
+    public void addAlimento(View view) {
         String kcal = ((TextView) view.findViewById(R.id.kcal)).getText().toString();
         String nombre = ((TextView) view.findViewById(R.id.nombre)).getText().toString();
 
