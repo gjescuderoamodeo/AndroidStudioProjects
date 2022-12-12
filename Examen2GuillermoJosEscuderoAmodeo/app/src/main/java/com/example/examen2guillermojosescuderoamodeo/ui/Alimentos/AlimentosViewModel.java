@@ -1,16 +1,16 @@
-package com.example.examen2guillermojosescuderoamodeo.ui.home;
+package com.example.examen2guillermojosescuderoamodeo.ui.Alimentos;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class HomeViewModel extends ViewModel {
+public class AlimentosViewModel extends ViewModel {
 
     private final MutableLiveData<String> mText;
 
-    public HomeViewModel() {
+    public AlimentosViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is home fragment");
+        mText.setValue("This is alimentos fragment");
     }
 
     public LiveData<String> getText() {
