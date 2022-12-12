@@ -12,8 +12,11 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.examen2guillermojosescuderoamodeo.databinding.FragmentAlimentosBinding;
+import com.example.examen2guillermojosescuderoamodeo.modelo.Alimento;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+
+import java.util.ArrayList;
 
 public class AlimentosFragment extends Fragment {
 
@@ -22,9 +25,12 @@ public class AlimentosFragment extends Fragment {
     private ViewPager2 viewPager2;
     private TabLayout tabs;
     private PageAdapter2 pageAdapter2; //Es una clase dentro de slideshow
+    public ArrayList<Alimento> alimentos;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+
+        this.alimentos=new ArrayList<Alimento>();
 
         AlimentosViewModel slideshowViewModel =
                 new ViewModelProvider(this).get(AlimentosViewModel.class);

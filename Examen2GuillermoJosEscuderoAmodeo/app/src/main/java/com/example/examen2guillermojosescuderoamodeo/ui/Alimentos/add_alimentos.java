@@ -7,8 +7,13 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.examen2guillermojosescuderoamodeo.R;
+import com.example.examen2guillermojosescuderoamodeo.modelo.Alimento;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +30,7 @@ public class add_alimentos extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    public ArrayList<Alimento> alimentos=new ArrayList<Alimento>();;
 
     public add_alimentos() {
         // Required empty public constructor
@@ -62,5 +68,15 @@ public class add_alimentos extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_add_alimentos, container, false);
+    }
+
+    public void addAlimento(View view){
+        String kcal = ((TextView) view.findViewById(R.id.kcal)).getText().toString();
+        String nombre = ((TextView) view.findViewById(R.id.nombre)).getText().toString();
+
+
+        this.alimentos.add(new Alimento(Integer.parseInt(kcal),nombre));
+        //Toast.makeText(this,"Ajustes guardados", Toast.LENGTH_SHORT).show();
+        //System.out.println("Alimentos: " + this.alimentos);
     }
 }
