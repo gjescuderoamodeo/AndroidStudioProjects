@@ -17,6 +17,7 @@
             android:layout_marginBottom="340dp"
             android:backgroundTint="@color/black"
             android:fontFamily="sans-serif"
+            android:onClick="addAlimento"
             android:text="Añadir Alimento"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             app:layout_constraintBottom_toBottomOf="parent"
