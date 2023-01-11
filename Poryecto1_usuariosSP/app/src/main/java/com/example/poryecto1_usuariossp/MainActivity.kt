@@ -1,14 +1,16 @@
 package com.example.poryecto1_usuariossp
 
+import android.content.Context
 import android.os.BugreportManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.poryecto1_usuariossp.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), OnClickItemListener {
 
     private lateinit var userAdapter:UserAdapter
     private lateinit var linearLayoutManager: RecyclerView.LayoutManager
@@ -20,13 +22,20 @@ class MainActivity : AppCompatActivity() {
         binding =ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        userAdapter=UserAdapter(getUsers())
+        userAdapter=UserAdapter(getUsers(),this)
         linearLayoutManager=LinearLayoutManager(this)
 
         binding.recyclerView.apply {
             layoutManager=linearLayoutManager
             adapter=userAdapter
         }
+
+        //Preferencias de aplicación (Como el cache de un navegador)
+        val preferences=getPreferences(Context.MODE_PRIVATE)
+        val texto=preferences.getString("valor_1","")
+        Toast.makeText(this,texto,Toast.LENGTH_LONG).show()
+        preferences.edit().putString("valor_1","hola").commit()
+
     }
 
     private fun getUsers():MutableList<User>{
@@ -42,5 +51,9 @@ class MainActivity : AppCompatActivity() {
 
         return users
 
+    }
+
+    override fun onClick(user: User) {
+        Toast.makeText(this,"Pulsado ${user.name}",Toast.LENGTH_LONG).show()
     }
 }

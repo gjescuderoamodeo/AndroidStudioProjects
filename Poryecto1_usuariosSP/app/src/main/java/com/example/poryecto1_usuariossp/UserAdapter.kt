@@ -10,7 +10,10 @@ import com.example.poryecto1_usuariossp.databinding.ItemUserBinding
 //UserAdapter recoje un listado de User y hereda de un Adapter, pero estará
 //personalizado con una plantilla referida a la clase interna de ViewHolder en UserAdaper
 
-class UserAdapter(private val users:List<User>):RecyclerView.Adapter<UserAdapter.ViewHolder>() {
+class UserAdapter(
+    private val users:List<User>,
+    private val listener: OnClickItemListener
+):RecyclerView.Adapter<UserAdapter.ViewHolder>() {
 
     //lateinit hace que el compilador espere a que más tarde la variable sea inicializada
     //ya que nunca puede ser null.
@@ -30,9 +33,13 @@ class UserAdapter(private val users:List<User>):RecyclerView.Adapter<UserAdapter
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
        val user=users.get(position)
         with(holder){
+            setListener(user)
             binding.tvName.text=user.name.toString()
             binding.tvOrder.text=user.id.toString()
         }
+
+
+
     }
 
     override fun getItemCount(): Int =users.size
@@ -40,6 +47,12 @@ class UserAdapter(private val users:List<User>):RecyclerView.Adapter<UserAdapter
     inner class ViewHolder(view: View):RecyclerView.ViewHolder(view){
 
         val binding=ItemUserBinding.bind(view)
+
+        fun setListener(user:User){
+            binding.root.setOnClickListener{
+                listener.onClick(user)
+            }
+        }
 
     }
 
