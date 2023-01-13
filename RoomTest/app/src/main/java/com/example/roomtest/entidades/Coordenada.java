@@ -7,6 +7,26 @@ import androidx.room.PrimaryKey;
 import com.example.roomtest.constantes.Constantes;
 
 @Entity(tableName= Constantes.NOMBRE_TABLA_POSICION)
+
+
+
+/*@Entity(tableName = "rutas",
+    //caso primary key compuesta
+        PrimaryKeys{"id_lugar","id_aaa"},
+
+    //  foreignKeys compuesta
+        foreignKeys = {
+                @ForeignKey(entity = Lugar.class,
+                        parentColumns = "id_lugar",
+                        childColumns = "origen",
+                        OnDelete=CASCADE),
+                @ForeignKey(entity = Lugar.class,
+                        parentColumns = "id_lugar",
+                        childColumns = "destino")
+        }
+)*/
+
+
 public class Coordenada {
 
     @PrimaryKey(autoGenerate=true)
