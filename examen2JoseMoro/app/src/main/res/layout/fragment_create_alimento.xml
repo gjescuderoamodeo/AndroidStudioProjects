@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.fragmentAlimentos.createAlimento">
+
+    <TextView
+        android:id="@+id/nombreA"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:layout_marginTop="49dp"
+        android:layout_marginBottom="11dp"
+        android:gravity="center"
+        android:text="@string/nombre" />
+
+    <EditText
+        android:id="@+id/nombreAlimento"
+        android:layout_width="match_parent"
+        android:layout_height="73dp"
+        android:layout_marginBottom="23dp"
+        android:autofillHints=""
+        android:hint="@string/app_name"
+        android:inputType="text"
+        android:textColorHint="#757575"
+        tools:ignore="DuplicateSpeakableTextCheck" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="30dp"
+        android:gravity="center"
+        android:text="@string/kcal" />
+
+    <EditText
+        android:id="@+id/kcalAl"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginBottom="23dp"
+        android:ems="10"
+        android:hint="@string/app_name"
+        android:inputType="number"
+        android:minHeight="48dp"
+        android:textColorHint="#757575"
+        android:autofillHints="" />
+
+    <Button
+        android:id="@+id/addAl"
+        android:layout_width="390dp"
+        android:layout_height="66dp"
+        android:layout_marginStart="19dp"
+        android:layout_marginEnd="19dp"
+        android:layout_marginBottom="333dp"
+        android:text="@string/a_adir" />
+
+</LinearLayout>

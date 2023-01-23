@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/crearDiet"
+        android:title="Crear Dieta" />
+    <item
+        android:id="@+id/verDiet"
+        android:title="Ver Dieta" />
+</menu>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dieta"
+    app:startDestination="@id/crearDietaFragment">
+
+    <fragment
+        android:id="@+id/crearDietaFragment"
+        android:name="com.example.examen2josemoro.ui.fragmentDieta.CrearDietaFragment"
+        android:label="fragment_crear_dieta"
+        tools:layout="@layout/fragment_crear_dieta" >
+        <action
+            android:id="@+id/action_crearDietaFragment_to_verDieta"
+            app:destination="@id/verDieta" />
+    </fragment>
+    <fragment
+        android:id="@+id/verDieta"
+        android:name="com.example.examen2josemoro.ui.fragmentDieta.verDieta"
+        android:label="fragment_ver_dieta"
+        tools:layout="@layout/fragment_ver_dieta" >
+        <action
+            android:id="@+id/action_verDieta_to_crearDietaFragment"
+            app:destination="@id/crearDietaFragment" />
+    </fragment>
+</navigation>
