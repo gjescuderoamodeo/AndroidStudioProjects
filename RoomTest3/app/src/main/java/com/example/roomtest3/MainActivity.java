@@ -10,6 +10,7 @@ import com.example.roomtest3.room.ItinerarioBD;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.util.Log;
+import android.view.View;
 
 import java.util.List;
 
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
         /*binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -42,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         });*/
 
         //test de Room
-        testRoom();
+        //testRoom();
 
     }
 
@@ -95,5 +97,9 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    }
+
+    public void cosas(View view) {
+        testRoom();
     }
 }
