@@ -37,7 +37,14 @@ public interface AlumnoDao {
 
     //Crear un método que devuelva los alumnos matriculados en una asignatura
     //determinada
-    @Query("SELECT * FROM alumno a, Asignatura by WHERE asignaturas = :grupoId")
-    List<Alumno> getAlumnosByGrupo(int grupoId);
+
+
+    //@Query("SELECT a.* FROM Alumno a, Asignatura b, AsignaturaAlumno aa " +
+    //        "WHERE aa.alumnoId=a.id AND")
+    //List<Alumno> getAlumnosByAsignatura(int asignaturaId);
+
+    @Query("SELECT a.* FROM alumno a INNER JOIN AsignaturaAlumno aa ON aa.alumnoId = a.id " +
+            "WHERE aa.asignaturaId = :asignaturaId")
+    List<Alumno> getAlumnosByAsignatura(int asignaturaId);
 
 }

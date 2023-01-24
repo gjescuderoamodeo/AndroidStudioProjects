@@ -23,5 +23,19 @@ public class Asignatura {
     @Relation(parentColumn = "id", entityColumn = "asignaturaId", entity = AsignaturaAlumno.class)
     private List<Alumno> alumnos;
 
+    public Asignatura() {
+    }
 
+    public Asignatura(String nombre, List<Alumno> alumnos) {
+        this.nombre = nombre;
+        this.alumnos = alumnos;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }

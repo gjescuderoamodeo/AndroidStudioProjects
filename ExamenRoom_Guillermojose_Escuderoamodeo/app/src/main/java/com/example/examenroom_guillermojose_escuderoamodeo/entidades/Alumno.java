@@ -32,8 +32,7 @@ public class Alumno {
     public Alumno() {
     }
 
-    public Alumno(int id, String nombre, String apellido, List<Asignatura> asignaturas, Grupo grupo) {
-        this.id = id;
+    public Alumno(String nombre, String apellido) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.asignaturas = asignaturas;

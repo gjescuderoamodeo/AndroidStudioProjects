@@ -24,7 +24,7 @@ public interface AsignaturaDao {
     @Query("DELETE FROM Asignatura")
     void nukeTable();
 
-    @Query("SELECT * FROM asignatura")
+    @Query("SELECT * FROM Asignatura")
     List<Asignatura> getAllAsignaturas();
 
     @Query("SELECT * FROM asignatura WHERE id = :id")

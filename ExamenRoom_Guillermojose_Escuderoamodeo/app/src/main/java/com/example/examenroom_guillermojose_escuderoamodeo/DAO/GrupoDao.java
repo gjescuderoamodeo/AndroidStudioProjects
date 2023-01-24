@@ -24,6 +24,9 @@ public interface GrupoDao {
     @Query("SELECT * FROM grupo")
     List<Grupo> getAllGrupos();
 
+    @Query("DELETE FROM Grupo")
+    void nukeTable();
+
     @Query("SELECT * FROM grupo WHERE id = :id")
     Grupo getGrupoById(String id);
 }

@@ -25,6 +25,9 @@ public interface ProfesorDao {
     @Query("SELECT * FROM Profesor")
     List<Profesor> getAllProfesores();
 
+    @Query("DELETE FROM Profesor")
+    void nukeTable();
+
     @Query("SELECT * FROM profesor WHERE id = :id")
     Profesor getProfesorById(String id);
 }

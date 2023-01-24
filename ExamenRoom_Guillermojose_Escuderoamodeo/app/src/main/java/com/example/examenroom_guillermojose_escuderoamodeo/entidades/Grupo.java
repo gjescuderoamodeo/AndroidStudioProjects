@@ -33,6 +33,13 @@ public class Grupo {
         this.aula = aula;
     }
 
+    public Grupo(String id, String nombre, String aula, List<Alumno> alumnos) {
+        this.id = id;
+        this.nombre = nombre;
+        this.aula = aula;
+        this.alumnos = alumnos;
+    }
+
     public Grupo() {
     }
 
