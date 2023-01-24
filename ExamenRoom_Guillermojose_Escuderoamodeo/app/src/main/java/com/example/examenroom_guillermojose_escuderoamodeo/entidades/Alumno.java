@@ -26,13 +26,34 @@ public class Alumno {
     @Relation(parentColumn = "id", entityColumn = "alumnoId", entity = AsignaturaAlumno.class)
     private List<Asignatura> asignaturas;
 
+    @Relation(parentColumn = "id", entityColumn = "grupoId", entity = Grupo.class)
+    private Grupo grupo;
+
     public Alumno() {
     }
 
-    public Alumno(int id, String nombre, String apellido) {
+    public Alumno(int id, String nombre, String apellido, List<Asignatura> asignaturas, Grupo grupo) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
+        this.asignaturas = asignaturas;
+        this.grupo = grupo;
+    }
+
+    public List<Asignatura> getAsignaturas() {
+        return asignaturas;
+    }
+
+    public void setAsignaturas(List<Asignatura> asignaturas) {
+        this.asignaturas = asignaturas;
+    }
+
+    public Grupo getGrupo() {
+        return grupo;
+    }
+
+    public void setGrupo(Grupo grupo) {
+        this.grupo = grupo;
     }
 
     public int getId() {
