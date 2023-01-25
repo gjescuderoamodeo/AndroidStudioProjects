@@ -32,7 +32,7 @@ public interface AlumnoDao {
 
     //método en Dao de Alumnos que devuelva los alumnos de un Grupo
     //determinado
-    @Query("SELECT * FROM alumno WHERE grupo = :grupoId")
+    @Query("SELECT * FROM alumno WHERE alumno.grupoId = :grupoId")
     List<Alumno> getAlumnosByGrupo(int grupoId);
 
     //Crear un método que devuelva los alumnos matriculados en una asignatura

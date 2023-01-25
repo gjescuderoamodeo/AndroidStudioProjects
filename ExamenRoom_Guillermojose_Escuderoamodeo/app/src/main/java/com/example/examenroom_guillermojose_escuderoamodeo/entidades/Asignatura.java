@@ -20,15 +20,15 @@ public class Asignatura {
     @ColumnInfo(name = "nombre")
     public String nombre;
 
-    @Relation(parentColumn = "id", entityColumn = "asignaturaId", entity = AsignaturaAlumno.class)
-    private List<Alumno> alumnos;
+    //@Relation(parentColumn = "id", entityColumn = "asignaturaId", entity = AsignaturaAlumno.class)
+    //private List<Alumno> alumnos;
 
     public Asignatura() {
     }
 
-    public Asignatura(String nombre, List<Alumno> alumnos) {
+    public Asignatura(String nombre) {
         this.nombre = nombre;
-        this.alumnos = alumnos;
+        //this.alumnos = alumnos;
     }
 
     public int getId() {

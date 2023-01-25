@@ -1,6 +1,7 @@
 package com.example.examenroom_guillermojose_escuderoamodeo.entidades;
 
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -15,7 +16,8 @@ public class Grupo {
 
     //Grupo (id (String), nombre (String), aula (String))
     @PrimaryKey()
-    @ColumnInfo(name = "id")
+    @NonNull
+    @ColumnInfo(name = "grupoId")
     public String id;
 
     @ColumnInfo(name = "nombre")
@@ -24,8 +26,8 @@ public class Grupo {
     @ColumnInfo(name = "aula")
     public String aula;
 
-    @Relation(parentColumn = "id", entityColumn = "grupoId", entity = Alumno.class)
-    private List<Alumno> alumnos;
+  /*  @Relation(parentColumn = "id", entityColumn = "grupoId", entity = Alumno.class)
+    private List<Alumno> alumnos;*/
 
     public Grupo(String id, String nombre, String aula) {
         this.id = id;
@@ -33,12 +35,6 @@ public class Grupo {
         this.aula = aula;
     }
 
-    public Grupo(String id, String nombre, String aula, List<Alumno> alumnos) {
-        this.id = id;
-        this.nombre = nombre;
-        this.aula = aula;
-        this.alumnos = alumnos;
-    }
 
     public Grupo() {
     }

@@ -21,10 +21,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        ExamenRoom();
     }
 
-    /*public void ExamenRoom(){
+    public void ExamenRoom(){
 
         //Querrys para limpiar la BD
         ExamenBD.getExamenBD(getApplicationContext()).daoAsignatura().nukeTable();
@@ -33,41 +33,49 @@ public class MainActivity extends AppCompatActivity {
         ExamenBD.getExamenBD(getApplicationContext()).daoAsignaturaAlumno().nukeTable();
         //ExamenBD.getExamenBD(getApplicationContext()).daoAsignatura().nukeTable();
 
+        //creo grupo
+        Grupo grupo1 = new Grupo("1","DAW","33A");
 
         //creo alumnos
-        Alumno alumno1 = new Alumno("Guillermo","Escudero");
-        Alumno alumno2 = new Alumno("Juan Carlos","Bodoque");
-        Alumno alumno3 = new Alumno("Perico","gutierrez");
+        Alumno alumno1 = new Alumno("Guillermo","Escudero","1");
+        Alumno alumno2 = new Alumno("Juan Carlos","Bodoque","1");
+        Alumno alumno3 = new Alumno("Perico","gutierrez","1");
 
         //creo asignaturas
         //array alumnos
-        ArrayList<Alumno> alumnos1 = new ArrayList<>();
-        alumnos1.add(alumno1);
-        alumnos1.add(alumno2);
-        alumnos1.add(alumno3);
+        //ArrayList<Alumno> alumnos1 = new ArrayList<>();
+        //alumnos1.add(alumno1);
+        //alumnos1.add(alumno2);
+        //alumnos1.add(alumno3);
 
-        Asignatura asignatura1 = new Asignatura("Matemáticas",alumnos1);
+        Asignatura asignatura1 = new Asignatura("Matemáticas");
 
         //creo asignatura alumno
         AsignaturaAlumno asignaturaAlumno1 = new AsignaturaAlumno(1,1);
+        AsignaturaAlumno asignaturaAlumno2 = new AsignaturaAlumno(2,1);
+        AsignaturaAlumno asignaturaAlumno3 = new AsignaturaAlumno(3,1);
 
-        //creo grupo
-        Grupo grupo1 = new Grupo("1","DAW","33A",alumnos1);
+
 
         //añado bd
+        ExamenBD.getExamenBD(getApplicationContext()).daoGrupo().insert(grupo1);
+
         ExamenBD.getExamenBD(getApplicationContext()).daoAlumno().insert(alumno1);
         ExamenBD.getExamenBD(getApplicationContext()).daoAlumno().insert(alumno2);
+        ExamenBD.getExamenBD(getApplicationContext()).daoAlumno().insert(alumno3);
 
-        //ExamenBD.getExamenBD(getApplicationContext()).daoAsignatura().insert(asignatura1);
-        //ExamenBD.getExamenBD(getApplicationContext()).daoGrupo().insert(grupo1);
-        //ExamenBD.getExamenBD(getApplicationContext()).daoAsignaturaAlumno().insert(asignaturaAlumno1);
+        ExamenBD.getExamenBD(getApplicationContext()).daoAsignatura().insert(asignatura1);
+
+        ExamenBD.getExamenBD(getApplicationContext()).daoAsignaturaAlumno().insert(asignaturaAlumno1);
+        ExamenBD.getExamenBD(getApplicationContext()).daoAsignaturaAlumno().insert(asignaturaAlumno2);
+        ExamenBD.getExamenBD(getApplicationContext()).daoAsignaturaAlumno().insert(asignaturaAlumno3);
 
         List<Alumno> alumnos=
                 ExamenBD.getExamenBD(getApplicationContext()).daoAlumno().getAllAlumnos();
         //Log.d("CoordenadaAPP","hola mundo");
         for (Alumno al:alumnos) {
-            Log.d("ExamenRoom", al.id + " nombre: " + al.getNombre());
+            Log.d("...ExamenRoom", al.id + " nombre: " + al.getNombre());
         }
 
-    }*/
+    }
 }

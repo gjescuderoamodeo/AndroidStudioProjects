@@ -18,7 +18,7 @@ import com.example.examenroom_guillermojose_escuderoamodeo.entidades.AsignaturaA
 import com.example.examenroom_guillermojose_escuderoamodeo.entidades.Grupo;
 import com.example.examenroom_guillermojose_escuderoamodeo.entidades.Profesor;
 
-//@Database(entities={Alumno.class, Grupo.class, Asignatura.class, AsignaturaAlumno.class, Profesor.class},version=1)
+@Database(entities={Alumno.class, Grupo.class, Asignatura.class, AsignaturaAlumno.class, Profesor.class},version=1)
 public abstract class ExamenBD extends RoomDatabase {
 
         public static ExamenBD INSTANCE;
@@ -27,7 +27,7 @@ public abstract class ExamenBD extends RoomDatabase {
         public abstract AsignaturaDao daoAsignatura();
         public abstract GrupoDao daoGrupo();
         public abstract ProfesorDao daoProfesor();
-        public static ExamenBD getIinerarioBD(Context context){
+        public static ExamenBD getExamenBD(Context context){
         if(INSTANCE==null){
             //Usar allowMainThreadQueries() solo para pruebas
             INSTANCE= Room.databaseBuilder(context.getApplicationContext(), ExamenBD.class,
