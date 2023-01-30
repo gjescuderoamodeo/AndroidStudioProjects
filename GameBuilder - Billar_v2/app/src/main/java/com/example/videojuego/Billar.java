@@ -9,7 +9,10 @@ import android.view.MotionEvent;
 
 import com.example.videojuego.sprites.Bola;
 
+import com.example.videojuego.sprites.Pala;
+import com.example.videojuego.sprites.Pared;
 import com.example.videojuego.sprites.Sprite;
+import com.example.videojuego.sprites.Sprite2;
 
 import java.util.LinkedList;
 
@@ -22,6 +25,7 @@ public class Billar extends GameView implements OnTouchEventListener {
 
     //Actores del juego
     Bola bola1,bola2, bola3, bola4, bola5, bola6, bola7, bola8;
+    Pala pared1;
     //
 
     float lineX1,lineY1,lineX2,lineY2;
@@ -37,6 +41,7 @@ public class Billar extends GameView implements OnTouchEventListener {
 
     public Billar(Context context, int x, int y) {
         super(context,x,y);
+
         this.context = context;
         this.x = x;
         this.y = y;
@@ -57,14 +62,22 @@ public class Billar extends GameView implements OnTouchEventListener {
         bola6= new Bola(this, 300,1000, 50,Color.GREEN);
         actores.add(bola6);  bola6.setup();
         //bujeros
-        bola5 = new Bola(this, 20, 20, 50,Color.BLACK);
-        actores.add(bola5);  bola5.setup();
+        //bola5 = new Bola(this, 20, 20, 50,Color.BLACK);
+        //actores.add(bola5);  bola5.setup();
         bola5 = new Bola(this, 1760, 20, 50,Color.BLACK);
         actores.add(bola5);  bola5.setup();
         bola5 = new Bola(this, 1760, 1050, 50,Color.BLACK);
         actores.add(bola5);  bola5.setup();
         bola5 = new Bola(this, 20, 1050, 50,Color.BLACK);
         actores.add(bola5);  bola5.setup();
+
+        //pared
+        pared1 = new Pala(mScreenX, mScreenY);
+        Log.d("pepe",String.valueOf(mScreenX));
+        actores2.add(pared1);  pared1.setup();
+
+
+        //pared1 = new Pala(200,200);
 
 
     }
@@ -76,6 +89,11 @@ public class Billar extends GameView implements OnTouchEventListener {
         for (Sprite actor : actores) {
             if(actor.isVisible())
                actor.update();
+        }
+
+        for (Sprite2 actor : actores2) {
+            if(actor.isVisible())
+                actor.update();
         }
     }
 
@@ -89,6 +107,12 @@ public class Billar extends GameView implements OnTouchEventListener {
                     actor.pinta(canvas);
             }
         }
+        synchronized(actores2) {
+            for (Sprite2 actor : actores2) {
+                actor.pinta(canvas);
+            }
+        }
+
         //pintar marcos
         //canvas.drawColor(Color.argb(255, 0, 102, 200));
 

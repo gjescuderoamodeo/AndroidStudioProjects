@@ -84,7 +84,7 @@ public abstract class Sprite implements OnColisionListener {
         this.game = game;
     }
 
-     public Sprite(GameView game){
+     public Sprite(){
          this.game=game;
          visible=true;
          paint=new Paint();

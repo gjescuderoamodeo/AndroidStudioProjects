@@ -1,9 +1,6 @@
 package com.example.videojuego.sprites;
 
 import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.RectF;
-import android.util.Log;
 
 import com.example.videojuego.GameView;
 import com.example.videojuego.OnColisionListener;
@@ -18,7 +15,7 @@ public class Bola extends Sprite implements OnColisionListener{
     public float rozamiento= (float) 0.98;
 
     public Bola(GameView game, int x, int y, int r, int color) {
-        super(game);
+        super();
         this.game=(Billar)game;
         centroX=x;
         centroY=y;
@@ -28,7 +25,6 @@ public class Bola extends Sprite implements OnColisionListener{
         velInicialY= (float) (Math.random() * 20);
         velActualX=velInicialX;
         velActualY=velInicialY;
-
     }
 
     @Override
@@ -81,6 +77,25 @@ public class Bola extends Sprite implements OnColisionListener{
     @Override
     public void onColisionEvent(Sprite s) {
         if (s instanceof Bola) {
+            if(activa){
+                Bola b=(Bola)s;
+                float dy=(float)(b.centroY-centroY);
+                float dx=(float)(b.centroX-centroX);
+                float ang=(float)Math.atan2(dy,dx);
+                double cosa=Math.cos(ang);
+                double sina=Math.sin(ang);
+                float vx2=(float)(cosa*b.velActualX+sina*b.velActualY);
+                float vy1=(float)(cosa*b.velActualY-sina*b.velActualX);
+                float vx1=(float)(cosa*velActualX+sina*velActualY);
+                float vy2=(float)(cosa*velActualY-sina*velActualX);
+                b.velActualX=(float)(cosa*vx1-sina*vy1);
+                b.velActualY=(float)(cosa*vy1+sina*vx1);
+                velActualX=(float)(cosa*vx2-sina*vy2);
+                velActualY=(float)(cosa*vy2+sina*vx2);
+            }
+        }
+
+        if (s instanceof Pared) {
             if(activa){
                 Bola b=(Bola)s;
                 float dy=(float)(b.centroY-centroY);

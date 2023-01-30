@@ -8,6 +8,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import com.example.videojuego.sprites.Sprite;
+import com.example.videojuego.sprites.Sprite2;
 
 import java.util.LinkedList;
 
@@ -26,7 +27,7 @@ public abstract class GameView extends SurfaceView implements Runnable {
     public Canvas canvas;
     public Paint paint;
     //Tamaño de la pantalla en píxeles
-    private int mScreenX, mScreenY;
+    public int mScreenX, mScreenY;
 
     public int getmScreenX() {
         return mScreenX;
@@ -54,6 +55,7 @@ public abstract class GameView extends SurfaceView implements Runnable {
     OnTouchEventListener listener;
 
     public static LinkedList<Sprite> actores=new LinkedList<>();
+    public static LinkedList<Sprite2> actores2=new LinkedList<>();
 
     public GameView(Context context, int x, int y) {
         super(context);
@@ -123,11 +125,25 @@ public abstract class GameView extends SurfaceView implements Runnable {
                         actor.onColisionEvent(actores.get(j));
                 }
             }
+
+        for (int i=0;i<actores2.size()-1;i++)
+            if(actores2.get(i).isVisible()) {
+                Sprite2 actor=actores2.get(i);
+                for (int j=i+1;j<actores2.size();j++){
+                    if (actores2.get(j).isVisible() && actor.colision(actores2.get(j)))
+                        actor.onColisionEvent(actores2.get(j));
+                }
+            }
     }
     synchronized public void limpia(){
         for (int i=0;i<actores.size();i++)
             if(!actores.get(i).isVisible()) {
                 actores.remove(i);
+            }
+
+        for (int i=0;i<actores2.size();i++)
+            if(!actores2.get(i).isVisible()) {
+                actores2.remove(i);
             }
     }
     public void draw(){

@@ -63,7 +63,8 @@ public  class Pala extends SpriteRect {
 
         //Controlamos los bordes
       if (colisionBordeLeft())  mXCoord=0;
-      if (colisionBordeRight())  mXCoord=mScreenX-(mRect.right-mRect.left);
+      if (colisionBordeRight())
+          mXCoord=mScreenX-(mRect.right-mRect.left);
       //  if (colisionBordeLeft()||colisionBordeRight())  setEstadoPala(STOP);//mXCoord=0;
 
         //Damos las coordenadas del Rectángulo. Solo se han modificado el eje X
