@@ -16,6 +16,11 @@ public class Pared extends Sprite{
     }
 
     @Override
+    public void onColisionEvent2(Sprite2 s) {
+
+    }
+
+    @Override
     public void onColisionBorderEvent(int border) {
 
     }

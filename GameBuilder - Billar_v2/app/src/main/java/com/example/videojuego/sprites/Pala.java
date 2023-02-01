@@ -101,6 +101,11 @@ public  class Pala extends SpriteRect implements OnColisionListener {
     }
 
     @Override
+    public void onColisionEvent2(Sprite2 s) {
+
+    }
+
+    @Override
     public void onColisionBorderEvent(int border) {
 
     }
