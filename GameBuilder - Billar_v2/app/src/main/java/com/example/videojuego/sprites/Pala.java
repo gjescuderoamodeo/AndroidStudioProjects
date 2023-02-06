@@ -3,81 +3,48 @@ package com.example.videojuego.sprites;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.RectF;
+import android.util.Log;
 
+import com.example.videojuego.Billar;
 import com.example.videojuego.GameView;
 import com.example.videojuego.OnColisionListener;
+import com.example.videojuego.Utilidades;
 
-public  class Pala extends SpriteRect implements OnColisionListener {
+import java.util.Random;
 
-    public final int STOP=0;
-    public final int LEFT=1;
-    public final int RIGHT=2;
-    public int estadoPala=STOP;
+public  class Pala extends Sprite implements OnColisionListener {
 
-    public Pala(int x, int y){
+    private Billar game;
+    public float centroX,centroY,radio;
+    public boolean activa=true;
 
-        super(x,y);
-
-        //longitud y anchura de la pala
-        //ancho=mScreenX/8;
-        //alto=mScreenY/25;
-
-        ancho=1000;
-        alto=5000;
-
-        //Posición inicial de la pala
-        mXCoord=mScreenX/2;
-        mYCoord=mScreenY-100;
-        //tamaño del rectángulo que pinta a la pala
-        mRect=new RectF(mXCoord, mYCoord, mXCoord+ ancho, mYCoord+ alto);
-        //Velocidad de la pala
-        velInicialX=0;
+    public Pala(GameView game, int x, int y){
+        super();
+        this.game=(Billar)game;
+        centroX=x;
+        centroY=y;
+        velInicialX= 0;
+        velInicialY= 0;
         velActualX=velInicialX;
-
-    }
-
-    @Override
-    public boolean colision(Sprite2 s) {
-        return false;
-    }
-    public void setEstadoPala(int estadoPala) {
-        this.estadoPala = estadoPala;
-    }
-    public void icrementaVelocidad(){
-
-        velActualX*=1.2f;
-
-    }
-    public void reset() {
-
-        velActualX=velInicialX;
-
-
-    }
-
-    @Override
-    public void update(GameView game, float fps) {
-
-        switch (estadoPala){
-            case STOP: break;
-            case LEFT:  mXCoord=mXCoord-velActualX;break;
-            case RIGHT: mXCoord=mXCoord+velActualX;break;
-        }
-
-        //Controlamos los bordes
-      if (colisionBordeLeft())  mXCoord=0;
-      if (colisionBordeRight())
-          mXCoord=mScreenX-(mRect.right-mRect.left);
-      //  if (colisionBordeLeft()||colisionBordeRight())  setEstadoPala(STOP);//mXCoord=0;
-
-        //Damos las coordenadas del Rectángulo. Solo se han modificado el eje X
-        mRect.left=mXCoord;
-        mRect.right=mXCoord+ ancho;
+        velActualY=velInicialY;
     }
 
     @Override
     public void setup() {
+        this.velActualX=0;
+        this.velActualY=0;
+       /* this.velActualX=velInicialX* game.factor_mov;
+        this.velActualY=velInicialY* game.factor_mov;
+        */
 
+    }
+
+    @Override
+    public boolean colision(Sprite s){
+        Bola b=(Bola)s;
+        boolean col= Utilidades.colisionCirculos(centroX,centroY,radio,b.centroX,b.centroY,b.radio);
+        if (!col) activa=true;
+        return col;
     }
 
     @Override
@@ -87,26 +54,89 @@ public  class Pala extends SpriteRect implements OnColisionListener {
 
 
     @Override
-    public void pinta(Canvas canvas) {
-
-        //dibujamos
-        paint.setColor(Color.argb(255, 255, 255, 255));
-        canvas.drawRect(getRect(), paint);
-
+    public void onFireColisionBorder(){
     }
-
     @Override
     public void onColisionEvent(Sprite s) {
-
+        if (s instanceof Bola) {
+            if(activa){
+                Bola b=(Bola)s;
+                float dy=(float)(b.centroY-centroY);
+                float dx=(float)(b.centroX-centroX);
+                float ang=(float)Math.atan2(dy,dx);
+                double cosa=Math.cos(ang);
+                double sina=Math.sin(ang);
+                float vx2=(float)(cosa*b.velActualX+sina*b.velActualY);
+                float vy1=(float)(cosa*b.velActualY-sina*b.velActualX);
+                float vx1=(float)(cosa*velActualX+sina*velActualY);
+                float vy2=(float)(cosa*velActualY-sina*velActualX);
+                b.velActualX=(float)(cosa*vx1-sina*vy1);
+                b.velActualY=(float)(cosa*vy1+sina*vx1);
+                velActualX=(float)(cosa*vx2-sina*vy2);
+                velActualY=(float)(cosa*vy2+sina*vx2);
+            }
+        }
     }
 
     @Override
     public void onColisionEvent2(Sprite2 s) {
+        if (s instanceof SpriteRect){
+            setRandomXVelocity();
+            invertirVelY();
+            //Log.d("pepe","eeee");
+        }
 
     }
+
+    //Invertir velocidad X
+    public void invertirVelX(){
+        velActualX=-velActualX;
+    }
+    //Invertir velocidad Y
+    public void invertirVelY(){
+        velActualY=-velActualY;
+    }
+
+
+    //acelerar aleatoriamete la velocidad
+    public void setRandomXVelocity(){
+        Random random=new Random();
+        int addVelocity=random.nextInt(2);
+        this.velActualX+=addVelocity;
+        if (addVelocity==0)invertirVelX();
+    }
+
 
     @Override
     public void onColisionBorderEvent(int border) {
 
+        switch (border){
+            case OnColisionListener.TOP:
+                velActualY=-velActualY;
+                break;
+            case OnColisionListener.BOTTOM:
+                velActualY=-velActualY;
+                break;
+            case OnColisionListener.RIGHT:
+                velActualX=-velActualX;
+                break;
+            case OnColisionListener.LEFT:
+                velActualX=-velActualX;
+                break;
+            default:
+
+                break;
+        }
     }
+
+    @Override
+    public void pinta(Canvas canvas) {
+
+        //dibujamos
+        paint.setColor(Color.argb(255, 108, 59, 42));
+        canvas.drawRect(80, 0, 0, 1200, paint);
+
+    }
+
+
 }

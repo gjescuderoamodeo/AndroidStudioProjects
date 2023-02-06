@@ -1,6 +1,7 @@
 package com.example.videojuego.sprites;
 
 import android.graphics.Canvas;
+import android.util.Log;
 
 import com.example.videojuego.GameView;
 import com.example.videojuego.OnColisionListener;
@@ -41,10 +42,17 @@ public class Bola extends Sprite implements OnColisionListener{
 
     @Override
     public boolean colision(Sprite s){
+        if(s instanceof Bola){
             Bola b=(Bola)s;
             boolean col=Utilidades.colisionCirculos(centroX,centroY,radio,b.centroX,b.centroY,b.radio);
             if (!col) activa=true;
             return col;
+        }else {
+            Pala p=(Pala) s;
+            boolean col=Utilidades.colisionCuadrados(centroX,centroY,radio,p.centroX,p.centroY);
+            if (!col) activa=true;
+            return col;
+        }
     }
 
     @Override
@@ -67,19 +75,20 @@ public class Bola extends Sprite implements OnColisionListener{
 
     @Override
     public void onFireColisionBorder(){
-        if (this.centroX-radio<0)
+        if (this.centroX-radio<50)
             onColisionBorderEvent(OnColisionListener.LEFT);
-        if (this.centroX+radio> game.getmScreenX())
+        if (this.centroX+radio> game.getmScreenX()-50)
             onColisionBorderEvent(OnColisionListener.RIGHT);
-        if (this.centroY-radio < 0)
+        if (this.centroY-radio < 50)
             onColisionBorderEvent(OnColisionListener.TOP);
-        if (this.centroY+radio > game.getmScreenY())
+        if (this.centroY+radio > game.getmScreenY()-50)
             onColisionBorderEvent(OnColisionListener.BOTTOM);
     }
     @Override
     public void onColisionEvent(Sprite s) {
+        Log.d("colision",s.toString());
         if (s instanceof Bola) {
-            if(activa){
+            if(activa && this.color!=-16777216){
                 Bola b=(Bola)s;
                 float dy=(float)(b.centroY-centroY);
                 float dx=(float)(b.centroX-centroX);
@@ -103,7 +112,7 @@ public class Bola extends Sprite implements OnColisionListener{
         if (s instanceof SpriteRect){
             setRandomXVelocity();
             invertirVelY();
-            //recolocaY(((Pala) objeto).getRect().top - 2);
+            //Log.d("pepe","eeee");
         }
 
     }

@@ -3,18 +3,15 @@ package com.example.videojuego;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
 import android.util.Log;
 import android.view.MotionEvent;
 
 import com.example.videojuego.sprites.Bola;
 
+import com.example.videojuego.sprites.Bujero;
 import com.example.videojuego.sprites.Pala;
-import com.example.videojuego.sprites.Pared;
 import com.example.videojuego.sprites.Sprite;
 import com.example.videojuego.sprites.Sprite2;
-
-import java.util.LinkedList;
 
 public class Billar extends GameView implements OnTouchEventListener {
 
@@ -25,6 +22,7 @@ public class Billar extends GameView implements OnTouchEventListener {
 
     //Actores del juego
     Bola bola1,bola2, bola3, bola4, bola5, bola6, bola7, bola8;
+    Bujero bujero1,bujero2,bujero3,bujero4;
     Pala pared1;
     //
 
@@ -61,20 +59,26 @@ public class Billar extends GameView implements OnTouchEventListener {
         actores.add(bola4);  bola4.setup();
         bola6= new Bola(this, 300,1000, 50,Color.GREEN);
         actores.add(bola6);  bola6.setup();
+
+        //pared
+        //pared1 = new Pala(mScreenX, mScreenY);
+        pared1 = new Pala(this, 1760, 20);
+        actores.add(pared1);  pared1.setup();
+        //Log.d("pepe",String.valueOf(mScreenX));
+        //actores2.add(pared1);  pared1.setup();
+
+
         //bujeros
         //bola5 = new Bola(this, 20, 20, 50,Color.BLACK);
         //actores.add(bola5);  bola5.setup();
-        bola5 = new Bola(this, 1760, 20, 50,Color.BLACK);
+        bola5 = new Bola(this, this.mScreenX-40, 40, 50,Color.YELLOW);
         actores.add(bola5);  bola5.setup();
-        bola5 = new Bola(this, 1760, 1050, 50,Color.BLACK);
-        actores.add(bola5);  bola5.setup();
-        bola5 = new Bola(this, 20, 1050, 50,Color.BLACK);
-        actores.add(bola5);  bola5.setup();
+        bola6 = new Bola(this, 40, this.mScreenY, 50,Color.BLACK);
+        actores.add(bola6);  bola6.setup();
+        bola7 = new Bola(this, 20, 1050, 50,Color.BLACK);
+        actores.add(bola7);  bola7.setup();
 
-        //pared
-        pared1 = new Pala(mScreenX, mScreenY);
-        Log.d("pepe",String.valueOf(mScreenX));
-        actores2.add(pared1);  pared1.setup();
+
 
 
         //pared1 = new Pala(200,200);
