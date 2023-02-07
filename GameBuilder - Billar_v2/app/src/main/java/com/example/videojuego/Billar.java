@@ -49,15 +49,15 @@ public class Billar extends GameView implements OnTouchEventListener {
 
     public void setupGame() {
 
-        bola3 = new Bola(this, 300, 100, 50,Color.BLUE);
+        bola3 = new Bola(this, 800, 300, 50,Color.BLUE);
         actores.add(bola3);  bola3.setup();
-        bola1 = new Bola(this,300, 300, 50,Color.WHITE);
+        bola1 = new Bola(this,300, 500, 50,Color.WHITE);
         actores.add(bola1);  bola1.setup();
-        bola2 = new Bola(this, 300, 500, 50,Color.RED);
+        bola2 = new Bola(this, 800, 500, 50,Color.RED);
         actores.add(bola2);  bola2.setup();
-        bola4 = new Bola(this, 300, 700, 50,Color.YELLOW);
+        bola4 = new Bola(this, 800, 700, 50,Color.YELLOW);
         actores.add(bola4);  bola4.setup();
-        bola6= new Bola(this, 300,1000, 50,Color.GREEN);
+        bola6= new Bola(this, 1200,720, 50,Color.GREEN);
         actores.add(bola6);  bola6.setup();
 
         //pared.getmScreenX()
