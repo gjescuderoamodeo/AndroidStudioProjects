@@ -15,10 +15,10 @@ import java.util.Random;
 public  class Pala extends Sprite implements OnColisionListener {
 
     private Billar game;
-    public float centroX,centroY,radio;
+    public float centroX,centroY,radio, left, top, right, bottom;
     public boolean activa=true;
 
-    public Pala(GameView game, int x, int y){
+    public Pala(GameView game, int x, int y, float left, float top,float right,float bottom){
         super();
         this.game=(Billar)game;
         centroX=x;
@@ -27,6 +27,11 @@ public  class Pala extends Sprite implements OnColisionListener {
         velInicialY= 0;
         velActualX=velInicialX;
         velActualY=velInicialY;
+
+        this.left=left;
+        this.right=right;
+        this.top=top;
+        this.bottom=bottom;
     }
 
     @Override
@@ -134,8 +139,8 @@ public  class Pala extends Sprite implements OnColisionListener {
 
         //dibujamos
         paint.setColor(Color.argb(255, 108, 59, 42));
-        canvas.drawRect(80, 0, 0, 1200, paint);
-
+        //canvas.drawRect(80, 0, 0, 1200, paint);
+        canvas.drawRect(this.left, this.top, this.right, this.bottom, paint);
     }
 
 

@@ -37,7 +37,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         Map<String, Object> city = new HashMap<>();
         city.put("name", "Los Angeles");
-        city.put("state", "CA"); 
+        city.put("state", "CA");
         city.put("country", "USA");
 
         db.collection("cities").document("LA")

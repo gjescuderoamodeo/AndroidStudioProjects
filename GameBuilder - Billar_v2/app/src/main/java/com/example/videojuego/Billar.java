@@ -23,7 +23,7 @@ public class Billar extends GameView implements OnTouchEventListener {
     //Actores del juego
     Bola bola1,bola2, bola3, bola4, bola5, bola6, bola7, bola8;
     Bujero bujero1,bujero2,bujero3,bujero4;
-    Pala pared1;
+    Pala pared1,pared2,pared3,pared4;
     //
 
     float lineX1,lineY1,lineX2,lineY2;
@@ -60,10 +60,17 @@ public class Billar extends GameView implements OnTouchEventListener {
         bola6= new Bola(this, 300,1000, 50,Color.GREEN);
         actores.add(bola6);  bola6.setup();
 
-        //pared
+        //pared.getmScreenX()
         //pared1 = new Pala(mScreenX, mScreenY);
-        pared1 = new Pala(this, 1760, 20);
+        pared2 = new Pala(this, 0, 0, this.mScreenX, 0,this.mScreenX-50,this.mScreenY);
+        actores.add(pared2);  pared2.setup();
+        //canvas.drawRect(80, 0, 0, 1200, paint);
+        pared1 = new Pala(this, 0, 0, 50, 0,0,this.mScreenY);
         actores.add(pared1);  pared1.setup();
+        pared3 = new Pala(this, 0, 0, 20, 0,this.mScreenX,40);
+        actores.add(pared3);  pared3.setup();
+        pared4 = new Pala(this, 0, 0, 20, this.mScreenY,this.mScreenX,this.mScreenY-40);
+        actores.add(pared4);  pared4.setup();
         //Log.d("pepe",String.valueOf(mScreenX));
         //actores2.add(pared1);  pared1.setup();
 
