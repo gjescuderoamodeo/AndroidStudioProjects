@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "638684908722",
+    "project_id": "pruebafirebase-25f9e",
+    "storage_bucket": "pruebafirebase-25f9e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:638684908722:android:3b0defe15bb24f75fd8dab",
+        "android_client_info": {
+          "package_name": "com.example.googlemapstest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "638684908722-fk780974nd57maqt2pn7vu1n4lgfrh2t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBcIY8_zJB8mactnjklIXG9KXugQXXkqwA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "638684908722-fk780974nd57maqt2pn7vu1n4lgfrh2t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

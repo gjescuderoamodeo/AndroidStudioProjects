@@ -11,6 +11,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.googlemapstest.databinding.ActivityMapsBinding;
+import com.google.firebase.*;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -20,6 +22,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //FireBase
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        //
+
 
         binding = ActivityMapsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
