@@ -1,6 +1,7 @@
 package com.example.videojuego.sprites;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.util.Log;
 
 import com.example.videojuego.GameView;
@@ -87,7 +88,7 @@ public class Bola extends Sprite implements OnColisionListener{
     @Override
     public void onColisionEvent(Sprite s) {
         Log.d("colision",s.toString());
-        if (s instanceof Bola) {
+        if (s instanceof Bola && s.color!= Color.BLACK) {
             if(activa && this.color!=-16777216){
                 Bola b=(Bola)s;
                 float dy=(float)(b.centroY-centroY);
@@ -104,6 +105,9 @@ public class Bola extends Sprite implements OnColisionListener{
                 velActualX=(float)(cosa*vx2-sina*vy2);
                 velActualY=(float)(cosa*vy2+sina*vx2);
             }
+        }
+        else{
+            this.visible=false;
         }
     }
 

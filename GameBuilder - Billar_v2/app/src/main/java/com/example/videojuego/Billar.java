@@ -53,7 +53,7 @@ public class Billar extends GameView implements OnTouchEventListener {
         actores.add(bola3);  bola3.setup();
         bola1 = new Bola(this,300, 500, 50,Color.WHITE);
         actores.add(bola1);  bola1.setup();
-        bola2 = new Bola(this, 800, 500, 50,Color.RED);
+        bola2 = new Bola(this, 800, 500, 50,Color.BLACK);
         actores.add(bola2);  bola2.setup();
         bola4 = new Bola(this, 800, 700, 50,Color.YELLOW);
         actores.add(bola4);  bola4.setup();
@@ -78,7 +78,7 @@ public class Billar extends GameView implements OnTouchEventListener {
         //bujeros
         //bola5 = new Bola(this, 20, 20, 50,Color.BLACK);
         //actores.add(bola5);  bola5.setup();
-        bola5 = new Bola(this, this.mScreenX-40, 40, 50,Color.YELLOW);
+        bola5 = new Bola(this, this.mScreenX-40, 40, 70,Color.BLACK);
         actores.add(bola5);  bola5.setup();
         bola6 = new Bola(this, 40, this.mScreenY, 50,Color.BLACK);
         actores.add(bola6);  bola6.setup();
@@ -118,11 +118,6 @@ public class Billar extends GameView implements OnTouchEventListener {
                     actor.pinta(canvas);
             }
         }
-        synchronized(actores2) {
-            for (Sprite2 actor : actores2) {
-                actor.pinta(canvas);
-            }
-        }
 
         //pintar marcos
         //canvas.drawColor(Color.argb(255, 0, 102, 200));
@@ -132,9 +127,16 @@ public class Billar extends GameView implements OnTouchEventListener {
         canvas.drawText("Factor_mov: " + this.factor_mov + "  Vidas: " + actores.size(), 10, 50, paint);
         paint.setTextSize(10);
         if(estaDentro){
-            paint.setColor(Color.WHITE);
+            paint.setColor(Color.YELLOW);
             paint.setStrokeWidth(5);
             canvas.drawLine(bola1.centroX,bola1.centroY,lineX2,lineY2,paint);
+            /*if (bola1.getVelActualX()>50){
+                bola1.setVelActualX(50);
+            }
+            if (bola1.getVelActualY()>50){
+                bola1.setVelActualY(50);
+            }*/
+            //Log.d("billar",bola1.getVelActualX()+"----"+bola1.getVelActualY());
           if(apunta){
               paint.setColor(Color.RED);
               canvas.drawLine(bola1.centroX,bola1.centroY,(bola1.centroX-lineX2)*1000,(bola1.centroY-lineY2)*1000,paint);
@@ -173,7 +175,14 @@ public class Billar extends GameView implements OnTouchEventListener {
             estaDentro=false;
             apunta=false;
         }
-        Log.d("billar",bola1.getVelActualX()+"----"+bola1.getVelActualY());
+
+        /*if (bola1.getVelActualX()>10){
+            bola1.setVelActualX(10);
+        }
+        if (bola1.getVelActualY()>10){
+            bola1.setVelActualY(10);
+        }*/
+        Log.d("billar",bola1.getVelActualX()+"-- velocidad --"+bola1.getVelActualY());
     }
 
     @Override
