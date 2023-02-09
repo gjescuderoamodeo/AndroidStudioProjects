@@ -108,6 +108,16 @@ public class Bola extends Sprite implements OnColisionListener{
         }
         else{
             this.visible=false;
+
+            //en caso de ser bola blanca, recolocar
+            if(this.color==Color.WHITE){
+                this.visible=true;
+                this.velActualX=0;
+                this.velActualY=0;
+                this.centroX=300;
+                this.centroY=500;
+            }
+
         }
     }
 

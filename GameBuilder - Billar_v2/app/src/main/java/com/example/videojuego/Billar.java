@@ -21,7 +21,8 @@ public class Billar extends GameView implements OnTouchEventListener {
     private final int y;
 
     //Actores del juego
-    Bola bola1,bola2, bola3, bola4, bola5, bola6, bola7, bola8;
+    Bola bola1,bola2, bola3, bola4, bola5, bola6, bola7, bola8, bola9, bola10, bola11, bola12
+            , bola13, bola14, bola15;
     Bujero bujero1,bujero2,bujero3,bujero4;
     Pala pared1,pared2,pared3,pared4;
     //
@@ -49,15 +50,23 @@ public class Billar extends GameView implements OnTouchEventListener {
 
     public void setupGame() {
 
-        bola3 = new Bola(this, 800, 300, 50,Color.BLUE);
-        actores.add(bola3);  bola3.setup();
+        //Blanca
         bola1 = new Bola(this,300, 500, 50,Color.WHITE);
         actores.add(bola1);  bola1.setup();
-        bola2 = new Bola(this, 800, 500, 50,Color.BLACK);
+
+        bola3 = new Bola(this, 800, 300, 50,Color.BLUE);
+        actores.add(bola3);  bola3.setup();
+        bola11 = new Bola(this, 1000, 350, 50,Color.GRAY);
+        actores.add(bola11);  bola11.setup();
+        bola2 = new Bola(this, 800, 500, 50,Color.RED);
         actores.add(bola2);  bola2.setup();
+        bola10 = new Bola(this, 1000, 500, 50,Color.MAGENTA);
+        actores.add(bola10);  bola10.setup();
+        bola12 = new Bola(this, 1200, 500, 50,Color.CYAN);
+        actores.add(bola12);  bola12.setup();
         bola4 = new Bola(this, 800, 700, 50,Color.YELLOW);
         actores.add(bola4);  bola4.setup();
-        bola6= new Bola(this, 1200,720, 50,Color.GREEN);
+        bola6= new Bola(this, 1000,650, 50,Color.GREEN);
         actores.add(bola6);  bola6.setup();
 
         //pared.getmScreenX()
@@ -78,12 +87,19 @@ public class Billar extends GameView implements OnTouchEventListener {
         //bujeros
         //bola5 = new Bola(this, 20, 20, 50,Color.BLACK);
         //actores.add(bola5);  bola5.setup();
-        bola5 = new Bola(this, this.mScreenX-40, 40, 70,Color.BLACK);
+        bola5 = new Bola(this, this.mScreenX-40, 40, 80,Color.BLACK);
         actores.add(bola5);  bola5.setup();
-        bola6 = new Bola(this, 40, this.mScreenY, 50,Color.BLACK);
+        bola6 = new Bola(this, 40, this.mScreenY-40, 80,Color.BLACK);
         actores.add(bola6);  bola6.setup();
-        bola7 = new Bola(this, 20, 1050, 50,Color.BLACK);
+        bola7 = new Bola(this, 40, 70, 70,Color.BLACK);
         actores.add(bola7);  bola7.setup();
+        bola8 = new Bola(this, this.mScreenX-40, this.mScreenY-40, 80,Color.BLACK);
+        actores.add(bola8);  bola8.setup();
+
+        bola9 = new Bola(this, (this.mScreenX-40)/2, this.mScreenY-20, 70,Color.BLACK);
+        actores.add(bola9);  bola9.setup();
+        bola9 = new Bola(this, (this.mScreenX-40)/2, 20, 70,Color.BLACK);
+        actores.add(bola9);  bola9.setup();
 
 
 
@@ -124,8 +140,9 @@ public class Billar extends GameView implements OnTouchEventListener {
 
         //dibujamos puntuacion y vidas
         paint.setTextSize(30);
-        canvas.drawText("Factor_mov: " + this.factor_mov + "  Vidas: " + actores.size(), 10, 50, paint);
-        paint.setTextSize(10);
+        //canvas.drawText("Factor_mov: " + this.factor_mov + "  Vidas: " + actores.size(), 10, 50, paint);
+        canvas.drawText("EL JUEGO DEL BILLAR: ", 150, 40, paint);
+        paint.setTextSize(800);
         if(estaDentro){
             paint.setColor(Color.YELLOW);
             paint.setStrokeWidth(5);
