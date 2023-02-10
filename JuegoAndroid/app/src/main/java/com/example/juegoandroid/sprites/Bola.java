@@ -59,10 +59,12 @@ public class Bola extends Sprite implements OnColisionListener{
     @Override
     public void update() {
         //Se actualiza la posicion de la bola según la anterior
-        velActualX*=rozamiento;
+        if(this.color!=Color.BLACK || this.color!=Color.RED){
+            velActualX*=rozamiento;
+            velActualY*=rozamiento;
+        }
       //  if (velActualX==0);velActualX=0;
         centroX+=velActualX;
-        velActualY*=rozamiento;
      //   if (velActualY==0)velActualY=0;
         centroY+=velActualY;
         //Log.d("billar",this.getVelActualX()+"----"+this.getVelActualX());
@@ -102,8 +104,8 @@ public class Bola extends Sprite implements OnColisionListener{
                 float vy2=(float)(cosa*velActualY-sina*velActualX);
                 b.velActualX=(float)(cosa*vx1-sina*vy1);
                 b.velActualY=(float)(cosa*vy1+sina*vx1);
-                velActualX=(float)(cosa*vx2-sina*vy2);
-                velActualY=(float)(cosa*vy2+sina*vx2);
+                    velActualX = (float) (cosa * vx2 - sina * vy2);
+                    velActualY = (float) (cosa * vy2 + sina * vx2);
             }
         }
         else{
@@ -114,8 +116,8 @@ public class Bola extends Sprite implements OnColisionListener{
                 this.visible=true;
                 this.velActualX=0;
                 this.velActualY=0;
-                this.centroX=300;
-                this.centroY=500;
+                this.centroX=game.mScreenX/2;
+                this.centroY=game.mScreenY-250;
             }
 
         }

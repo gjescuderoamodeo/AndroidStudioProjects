@@ -18,7 +18,7 @@ public class Billar extends GameView implements OnTouchEventListener {
     private final int y;
 
     //Actores del juego
-    Bola bola1,bola2;
+    Bola bola1,bola2,bola3;
     Pala pared1,pared2,pared3,pared4;
     //
 
@@ -46,10 +46,15 @@ public class Billar extends GameView implements OnTouchEventListener {
     public void setupGame() {
 
         //Blanca
-        bola1 = new Bola(this,300, 500, 50,Color.WHITE);
+        bola1 = new Bola(this,this.mScreenX/2, this.mScreenY-250, 50,Color.WHITE);
         actores.add(bola1);  bola1.setup();
-        //bola2 = new Bola(this,300, 500, 50,Color.WHITE);
-        //actores.add(bola2);  bola2.setup();
+        bola2 = new Bola(this,this.mScreenX/2, 400, 70,Color.RED);
+        bola2.setVelActualX(100);
+        actores.add(bola2);  bola2.setup();
+        bola2.setVelActualX(100);
+
+        bola3 = new Bola(this,this.mScreenX/2, 200, 70,Color.BLACK);
+        actores.add(bola3);  bola3.setup();
     }
 
     //Realiza la lógica del juego, movimientos, física, colisiones, interacciones..etc
@@ -125,8 +130,8 @@ public class Billar extends GameView implements OnTouchEventListener {
         if(estaDentro){
             lineX2=event.getX();
             lineY2=event.getY();
-            bola1.setVelActualX((lineX1-lineX2)/10);
-            bola1.setVelActualY((lineY1-lineY2)/10);
+            bola1.setVelActualX((lineX1-lineX2)/5);
+            bola1.setVelActualY((lineY1-lineY2)/5);
             estaDentro=false;
             apunta=false;
         }
