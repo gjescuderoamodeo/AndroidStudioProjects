@@ -49,12 +49,12 @@ public class Billar extends GameView implements OnTouchEventListener {
         bola1 = new Bola(this,this.mScreenX/2, this.mScreenY-250, 50,Color.WHITE);
         actores.add(bola1);  bola1.setup();
         bola2 = new Bola(this,this.mScreenX/2, 400, 70,Color.RED);
-        bola2.setVelActualX(100);
         actores.add(bola2);  bola2.setup();
-        bola2.setVelActualX(100);
+        //bola2.setVelActualX(100);
 
         bola3 = new Bola(this,this.mScreenX/2, 200, 70,Color.BLACK);
         actores.add(bola3);  bola3.setup();
+        //bola3.setVelActualX(100);
     }
 
     //Realiza la lógica del juego, movimientos, física, colisiones, interacciones..etc

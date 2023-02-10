@@ -59,7 +59,7 @@ public class Bola extends Sprite implements OnColisionListener{
     @Override
     public void update() {
         //Se actualiza la posicion de la bola según la anterior
-        if(this.color!=Color.BLACK || this.color!=Color.RED){
+        if(this.color!=Color.RED){
             velActualX*=rozamiento;
             velActualY*=rozamiento;
         }
@@ -104,8 +104,10 @@ public class Bola extends Sprite implements OnColisionListener{
                 float vy2=(float)(cosa*velActualY-sina*velActualX);
                 b.velActualX=(float)(cosa*vx1-sina*vy1);
                 b.velActualY=(float)(cosa*vy1+sina*vx1);
+                if(b.color!=Color.RED) {
                     velActualX = (float) (cosa * vx2 - sina * vy2);
                     velActualY = (float) (cosa * vy2 + sina * vx2);
+                }
             }
         }
         else{
