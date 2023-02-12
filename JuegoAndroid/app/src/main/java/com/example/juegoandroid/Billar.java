@@ -46,11 +46,11 @@ public class Billar extends GameView implements OnTouchEventListener {
     public void setupGame() {
 
         //Blanca
-        bola1 = new Bola(this,this.mScreenX/2, this.mScreenY-250, 50,Color.WHITE);
+        bola1 = new Bola(this,this.mScreenX/2, this.mScreenY-300, 50,Color.WHITE);
         actores.add(bola1);  bola1.setup();
         bola2 = new Bola(this,this.mScreenX/2, 400, 70,Color.RED);
         actores.add(bola2);  bola2.setup();
-        //bola2.setVelActualX(100);
+        bola2.setVelActualX(50);
 
         bola3 = new Bola(this,this.mScreenX/2, 200, 70,Color.BLACK);
         actores.add(bola3);  bola3.setup();
@@ -82,10 +82,9 @@ public class Billar extends GameView implements OnTouchEventListener {
         //canvas.drawColor(Color.argb(255, 0, 102, 200));
 
         //dibujamos puntuacion y vidas
-        paint.setTextSize(30);
+        paint.setTextSize(100);
         //canvas.drawText("Factor_mov: " + this.factor_mov + "  Vidas: " + actores.size(), 10, 50, paint);
-        canvas.drawText("EL JUEGO DEL BILLAR: ", 150, 40, paint);
-        paint.setTextSize(800);
+        canvas.drawText("EL JUEGO DEL BILLAR: ", 100, 100, paint);
         if(estaDentro){
             paint.setColor(Color.YELLOW);
             paint.setStrokeWidth(5);

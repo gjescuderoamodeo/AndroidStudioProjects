@@ -90,31 +90,30 @@ public class Bola extends Sprite implements OnColisionListener{
     @Override
     public void onColisionEvent(Sprite s) {
         Log.d("colision",s.toString());
-        if (s instanceof Bola && s.color!= Color.BLACK) {
-            if(activa && this.color!=-16777216){
-                Bola b=(Bola)s;
-                float dy=(float)(b.centroY-centroY);
-                float dx=(float)(b.centroX-centroX);
-                float ang=(float)Math.atan2(dy,dx);
-                double cosa=Math.cos(ang);
-                double sina=Math.sin(ang);
-                float vx2=(float)(cosa*b.velActualX+sina*b.velActualY);
-                float vy1=(float)(cosa*b.velActualY-sina*b.velActualX);
-                float vx1=(float)(cosa*velActualX+sina*velActualY);
-                float vy2=(float)(cosa*velActualY-sina*velActualX);
-                b.velActualX=(float)(cosa*vx1-sina*vy1);
-                b.velActualY=(float)(cosa*vy1+sina*vx1);
-                if(b.color!=Color.RED) {
-                    velActualX = (float) (cosa * vx2 - sina * vy2);
-                    velActualY = (float) (cosa * vy2 + sina * vx2);
-                }
-            }
+        //en caso de ser bola blanca, recolocar
+        if(this.color==Color.WHITE){
+
+            this.visible=true;
+            this.velActualX=0;
+            this.velActualY=0;
+            this.centroX=game.mScreenX/2;
+            this.centroY=game.mScreenY-250;
         }
         else{
             this.visible=false;
 
+            if(this.color==Color.RED) {
+                this.visible=true;
+                this.velActualX=50;
+                this.velActualY=0;
+                this.centroX=game.mScreenX/2;
+                this.centroY=400;
+            }
+
+
             //en caso de ser bola blanca, recolocar
             if(this.color==Color.WHITE){
+
                 this.visible=true;
                 this.velActualX=0;
                 this.velActualY=0;
