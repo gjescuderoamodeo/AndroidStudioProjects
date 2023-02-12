@@ -19,8 +19,6 @@ public class Billar extends GameView implements OnTouchEventListener {
 
     //Actores del juego
     Bola bola1,bola2,bola3;
-    Pala pared1,pared2,pared3,pared4;
-    //
 
     float lineX1,lineY1,lineX2,lineY2;
     boolean estaDentro=false;
@@ -78,24 +76,13 @@ public class Billar extends GameView implements OnTouchEventListener {
             }
         }
 
-        //pintar marcos
-        //canvas.drawColor(Color.argb(255, 0, 102, 200));
-
-        //dibujamos puntuacion y vidas
+        //dibujamos puntuacion
         paint.setTextSize(100);
-        //canvas.drawText("Factor_mov: " + this.factor_mov + "  Vidas: " + actores.size(), 10, 50, paint);
-        canvas.drawText("EL JUEGO DEL BILLAR: ", 100, 100, paint);
+        canvas.drawText("JUEGO CANASTA: ", 100, 100, paint);
         if(estaDentro){
             paint.setColor(Color.YELLOW);
             paint.setStrokeWidth(5);
             canvas.drawLine(bola1.centroX,bola1.centroY,lineX2,lineY2,paint);
-            /*if (bola1.getVelActualX()>50){
-                bola1.setVelActualX(50);
-            }
-            if (bola1.getVelActualY()>50){
-                bola1.setVelActualY(50);
-            }*/
-            //Log.d("billar",bola1.getVelActualX()+"----"+bola1.getVelActualY());
           if(apunta){
               paint.setColor(Color.RED);
               canvas.drawLine(bola1.centroX,bola1.centroY,(bola1.centroX-lineX2)*1000,(bola1.centroY-lineY2)*1000,paint);
@@ -134,19 +121,11 @@ public class Billar extends GameView implements OnTouchEventListener {
             estaDentro=false;
             apunta=false;
         }
-
-        /*if (bola1.getVelActualX()>10){
-            bola1.setVelActualX(10);
-        }
-        if (bola1.getVelActualY()>10){
-            bola1.setVelActualY(10);
-        }*/
         Log.d("billar",bola1.getVelActualX()+"-- velocidad --"+bola1.getVelActualY());
     }
 
     @Override
     public void ejecutaMove(MotionEvent event) {
-        //Log.d("billar","X: "+event.getX()+" Y: "+event.getY());
         apunta=true;
         lineX2=event.getX();
         lineY2=event.getY();
