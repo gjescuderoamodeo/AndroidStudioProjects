@@ -4,7 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.util.Log;
 
-import com.example.juegoandroid.Billar;
+import com.example.juegoandroid.Canasta;
 import com.example.juegoandroid.GameView;
 import com.example.juegoandroid.OnColisionListener;
 import com.example.juegoandroid.Utilidades;
@@ -13,14 +13,15 @@ import java.util.Random;
 
 public class Bola extends Sprite implements OnColisionListener{
 
-    private Billar game;
+    private Canasta game;
     public float centroX,centroY,radio;
     public boolean activa=true;
     public float rozamiento= (float) 0.98;
+    public static int puntuacion;
 
     public Bola(GameView game, int x, int y, int r, int color) {
         super();
-        this.game=(Billar)game;
+        this.game=(Canasta)game;
         centroX=x;
         centroY=y;
         radio=r;
@@ -29,6 +30,7 @@ public class Bola extends Sprite implements OnColisionListener{
         velInicialY= (float) (Math.random() * 20);
         velActualX=velInicialX;
         velActualY=velInicialY;
+        puntuacion=0;
     }
 
     @Override
@@ -63,15 +65,13 @@ public class Bola extends Sprite implements OnColisionListener{
             velActualX*=rozamiento;
             velActualY*=rozamiento;
         }
-      //  if (velActualX==0);velActualX=0;
         centroX+=velActualX;
-     //   if (velActualY==0)velActualY=0;
         centroY+=velActualY;
-        //Log.d("billar",this.getVelActualX()+"----"+this.getVelActualX());
       //Comprobamos colisiones con los bordes y entre los actores
         onFireColisionSprite();
         onFireColisionBorder();
        //Se actualizan otras variables internas
+        Log.d("puntu....", String.valueOf(puntuacion));
 
     }
 
@@ -89,7 +89,9 @@ public class Bola extends Sprite implements OnColisionListener{
     }
     @Override
     public void onColisionEvent(Sprite s) {
-        Log.d("colision",s.toString());
+        Log.d("colision2", String.valueOf(s.color));
+        Log.d("colision2", String.valueOf(Color.WHITE));
+        Log.d("colision2", String.valueOf(this.color));
         //en caso de ser bola blanca, recolocar
         if(this.color==Color.WHITE){
 
@@ -98,7 +100,12 @@ public class Bola extends Sprite implements OnColisionListener{
             this.velActualY=0;
             this.centroX=game.mScreenX/2;
             this.centroY=game.mScreenY-250;
+
+            if(s.color==Color.BLACK){
+                puntuacion=1+puntuacion;
+            }
         }
+
         else{
             this.visible=false;
 
@@ -109,15 +116,7 @@ public class Bola extends Sprite implements OnColisionListener{
                 this.centroX=game.mScreenX/2;
                 this.centroY=400;
             }
-            //en caso de ser bola blanca, recolocar
-            if(this.color==Color.WHITE){
 
-                this.visible=true;
-                this.velActualX=0;
-                this.velActualY=0;
-                this.centroX=game.mScreenX/2;
-                this.centroY=game.mScreenY-250;
-            }
 
         }
     }

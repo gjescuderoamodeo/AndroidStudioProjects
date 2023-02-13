@@ -7,10 +7,9 @@ import android.util.Log;
 import android.view.MotionEvent;
 
 import com.example.juegoandroid.sprites.Bola;
-import com.example.juegoandroid.sprites.Pala;
 import com.example.juegoandroid.sprites.Sprite;
 
-public class Billar extends GameView implements OnTouchEventListener {
+public class Canasta extends GameView implements OnTouchEventListener {
 
 
     private final Context context;
@@ -31,7 +30,7 @@ public class Billar extends GameView implements OnTouchEventListener {
     public int vidas = 3;
 
 
-    public Billar(Context context, int x, int y) {
+    public Canasta(Context context, int x, int y) {
         super(context,x,y);
 
         this.context = context;
@@ -58,11 +57,13 @@ public class Billar extends GameView implements OnTouchEventListener {
     //Realiza la lógica del juego, movimientos, física, colisiones, interacciones..etc
     @Override
     public void actualiza() {
+        //Log.d("colision", String.valueOf(this.bola1.puntuacion));
         //actualizamos los actores
         for (Sprite actor : actores) {
             if(actor.isVisible())
                actor.update();
         }
+
     }
 
     //dibuja la pantalla
@@ -79,6 +80,7 @@ public class Billar extends GameView implements OnTouchEventListener {
         //dibujamos puntuacion
         paint.setTextSize(100);
         canvas.drawText("JUEGO CANASTA: ", 100, 100, paint);
+        canvas.drawText("CANASTAS: "+this.bola1.puntuacion, 100, 500, paint);
         if(estaDentro){
             paint.setColor(Color.YELLOW);
             paint.setStrokeWidth(5);
@@ -86,9 +88,7 @@ public class Billar extends GameView implements OnTouchEventListener {
           if(apunta){
               paint.setColor(Color.RED);
               canvas.drawLine(bola1.centroX,bola1.centroY,(bola1.centroX-lineX2)*1000,(bola1.centroY-lineY2)*1000,paint);
-
           }
-
         }
 
     }
@@ -106,7 +106,6 @@ public class Billar extends GameView implements OnTouchEventListener {
             lineY2=bola1.centroY;
 
         }
-        Log.d("billar","X: "+lineX1+" Y: "+lineY1);
 
     }
 
@@ -121,7 +120,6 @@ public class Billar extends GameView implements OnTouchEventListener {
             estaDentro=false;
             apunta=false;
         }
-        Log.d("billar",bola1.getVelActualX()+"-- velocidad --"+bola1.getVelActualY());
     }
 
     @Override

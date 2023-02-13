@@ -3,6 +3,7 @@ package com.example.juegoandroid;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -74,11 +75,13 @@ public abstract class GameView extends SurfaceView implements Runnable {
         while (enEjecucion) {
             if (!pausado) {
                 update();
+                draw();
             }
         }
     }
 
     public void update(){
+        //Log.d("colision", "eee");
 
         calculaFPS();
         actualiza();
@@ -159,6 +162,8 @@ public abstract class GameView extends SurfaceView implements Runnable {
     }
 
     public abstract void dibuja(Canvas canvas);
-    protected abstract void actualiza();
+
+    protected void actualiza() {
+    }
 
 }

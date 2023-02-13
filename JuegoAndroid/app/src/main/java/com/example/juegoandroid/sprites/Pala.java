@@ -3,7 +3,7 @@ package com.example.juegoandroid.sprites;
 import android.graphics.Canvas;
 import android.graphics.Color;
 
-import com.example.juegoandroid.Billar;
+import com.example.juegoandroid.Canasta;
 import com.example.juegoandroid.GameView;
 import com.example.juegoandroid.OnColisionListener;
 import com.example.juegoandroid.Utilidades;
@@ -12,13 +12,13 @@ import java.util.Random;
 
 public  class Pala extends Sprite implements OnColisionListener {
 
-    private Billar game;
+    private Canasta game;
     public float centroX,centroY,radio, left, top, right, bottom;
     public boolean activa=true;
 
     public Pala(GameView game, int x, int y, float left, float top, float right, float bottom){
         super();
-        this.game=(Billar)game;
+        this.game=(Canasta)game;
         centroX=x;
         centroY=y;
         velInicialX= 0;

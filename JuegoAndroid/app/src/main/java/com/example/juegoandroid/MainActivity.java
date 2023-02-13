@@ -25,7 +25,7 @@ public class MainActivity extends Activity {
         Point size=new Point();
         display.getSize(size);
 
-        juego=new Billar(this,size.x,size.y);
+        juego=new Canasta(this,size.x,size.y);
 
         setContentView(juego);
     }
