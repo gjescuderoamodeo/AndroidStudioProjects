@@ -1,6 +1,8 @@
 package com.example.juegoandroid;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.util.Log;
@@ -71,6 +73,47 @@ public class Canasta extends GameView implements OnTouchEventListener {
     public void dibuja(Canvas canvas) {
         //se pinta desde la capa más lejana hasta la más cercana
         canvas.drawColor(Color.argb(255, 205, 92, 92));
+
+        //imagen cancha baloncesto
+        // Cargar la imagen en un objeto Bitmap
+        paint.setAlpha(128);
+        //Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.cancha);
+
+        // Dibujar el Bitmap en el Canvas
+        //canvas.drawBitmap(bitmap, 0, 0, paint);
+
+        // Cargar la imagen de un recurso
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.cancha);
+
+        // Obtener las dimensiones de la pantalla
+        int screenWidth = getWidth();
+        int screenHeight = getHeight();
+
+        // Calcular la relación de aspecto de la imagen
+        float bitmapRatio = (float)bitmap.getWidth() / (float)bitmap.getHeight();
+        float screenRatio = (float)screenWidth / (float)screenHeight;
+
+        // Calcular las dimensiones de la imagen escalada
+        int scaledWidth, scaledHeight;
+        if (screenRatio > bitmapRatio) {
+            scaledWidth = screenWidth;
+            scaledHeight = (int)(scaledWidth / bitmapRatio);
+        } else {
+            scaledHeight = screenHeight;
+            scaledWidth = (int)(scaledHeight * bitmapRatio);
+        }
+
+        // Escalar la imagen a las nuevas dimensiones
+        Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, scaledWidth, scaledHeight, true);
+
+        // Dibujar la imagen en el canvas
+        canvas.drawBitmap(scaledBitmap, 0, 0, null);
+
+        // Liberar la memoria de los bitmaps
+        bitmap.recycle();
+        scaledBitmap.recycle();
+
+
         synchronized(actores) {
             for (Sprite actor : actores) {
                     actor.pinta(canvas);
