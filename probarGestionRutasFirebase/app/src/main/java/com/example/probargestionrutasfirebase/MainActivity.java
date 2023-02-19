@@ -10,6 +10,7 @@ import android.util.Log;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -22,9 +23,30 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        //FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        Map<String, Object> lugar = new HashMap<>();
+        // Obtener una referencia a la colección "Lugar" en la base de datos
+        CollectionReference collectionReference = FirebaseFirestore.getInstance().collection("Lugar");
+
+        // Crear un objeto de tipo "Lugar" con los datos que deseas agregar
+        Lugar lugar = new Lugar("Nombre de prueba", "Descripción de prueba");
+
+        // Utilizar el método "add()" para agregar los datos a la colección en Firestore
+        collectionReference.add(lugar).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            @Override
+            public void onSuccess(DocumentReference documentReference) {
+                Log.d("TAG", "DocumentSnapshot added with ID: " + documentReference.getId());
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.w("TAG", "Error adding document", e);
+            }
+        });
+
+
+
+        /*Map<String, Object> lugar = new HashMap<>();
         lugar.put("test", "Los Angeles");
         lugar.put("2", "CA");
         lugar.put("3", "USA");
@@ -58,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onFailure(@NonNull Exception e) {
                         Log.w(TAG, "Error adding document", e);
                     }
-                });
+                });*/
 
     }
 }
