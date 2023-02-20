@@ -8,6 +8,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Camera;
 import android.location.Address;
 import android.location.Criteria;
 import android.location.Geocoder;
@@ -22,6 +23,14 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.maps.android.SphericalUtil;
+
 
 public class MainActivity extends AppCompatActivity implements LocationListener {
 
@@ -29,11 +38,42 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     private LocationManager locationManager;
     private String provider;
     private Location referencia;
+    LatLng previa, ultima;
+
+    private GoogleMap mMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //
+
+        LatLng sydney = new LatLng(34,151);
+        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
+        googleMap.setMapType(GoogleMap.MAP_TYPE_FORMAT);
+        googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener());
+
+        @Override
+        public void OnMapClick(LatLng latLng){
+            googleMap.clear(); //limpiar marcadores previos
+
+            ultima=latLng;
+
+            MarkerOptions markerOptions = new MarkerOptions().position(latLng);
+            googleMap.addMarker(markerOptions);
+            double lat = latLng.latitude;
+            double lng = latLng.longitude;
+
+            double distance = SphericalUtil.computeDistanceBetween(previa,ultima);
+
+
+        }
+
+
+        //
 
         setContentView(R.layout.activity_main);
 
