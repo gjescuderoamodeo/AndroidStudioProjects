@@ -33,7 +33,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
 
         //FireBase
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        /*FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         Map<String, Object> city = new HashMap<>();
         city.put("name", "Los Angeles");
@@ -53,7 +53,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     public void onFailure(@NonNull Exception e) {
                         Log.w(TAG, "Error writing document", e);
                     }
-                });
+                });*/
         //
 
 
