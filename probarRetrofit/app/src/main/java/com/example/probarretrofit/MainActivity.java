@@ -26,7 +26,11 @@ public class MainActivity extends AppCompatActivity {
 
         Log.d("/retrofit","probando retrofit");
 
-        Retrofit retrofit=RetrofitCliente.getClient("http://127.0.0.1:8080/api/");
+        //Retrofit retrofit=RetrofitCliente.getClient("http://127.0.0.1:8080/api/");
+        //con esto escucha android en la máquina fisica. Asi puedo usar localhost
+        Retrofit retrofit = RetrofitCliente.getClient("http://10.0.2.2:3000/");
+
+
         api = retrofit.create(GestionUsuariosAPI.class);
 
         Call<List<Usuario>> call=api.getUsuarios();
