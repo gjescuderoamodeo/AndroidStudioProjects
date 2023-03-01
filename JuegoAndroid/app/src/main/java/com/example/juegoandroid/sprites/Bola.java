@@ -17,7 +17,7 @@ public class Bola extends Sprite implements OnColisionListener{
     public float centroX,centroY,radio;
     public boolean activa=true;
     public float rozamiento= (float) 0.98;
-    public static int puntuacion;
+    public int puntuacion;
 
     public Bola(GameView game, int x, int y, int r, int color) {
         super();
@@ -31,6 +31,18 @@ public class Bola extends Sprite implements OnColisionListener{
         velActualX=velInicialX;
         velActualY=velInicialY;
         puntuacion=0;
+    }
+
+    public void invisible(){
+        this.visible=false;
+    }
+
+    public void visible(){
+        this.visible=true;
+    }
+
+    public void resetPuntuacion(){
+        this.puntuacion=0;
     }
 
     @Override
@@ -71,6 +83,28 @@ public class Bola extends Sprite implements OnColisionListener{
         onFireColisionSprite();
         onFireColisionBorder();
        //Se actualizan otras variables internas
+        Log.d("puntu....", String.valueOf(puntuacion));
+
+    }
+
+    public void update2(boolean booleano) {
+        //Se actualiza la posicion de la bola según la anterior
+        if(this.color!=Color.RED){
+            velActualX*=rozamiento;
+            velActualY*=rozamiento;
+        }
+        if(booleano){
+            this.visible();
+        }else{
+            this.invisible();
+        }
+
+        centroX+=velActualX;
+        centroY+=velActualY;
+        //Comprobamos colisiones con los bordes y entre los actores
+        onFireColisionSprite();
+        onFireColisionBorder();
+        //Se actualizan otras variables internas
         Log.d("puntu....", String.valueOf(puntuacion));
 
     }

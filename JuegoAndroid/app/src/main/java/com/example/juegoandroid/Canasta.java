@@ -19,10 +19,11 @@ public class Canasta extends GameView implements OnTouchEventListener {
     private final int y;
 
     //Actores del juego
-    Bola bola1,bola2,bola3;
+    Bola bola1,bola2,bola3,bola4;
 
     float lineX1,lineY1,lineX2,lineY2;
     boolean estaDentro=false;
+    boolean estaDentro2=false;
     boolean apunta=false;
 
 
@@ -53,7 +54,8 @@ public class Canasta extends GameView implements OnTouchEventListener {
 
         bola3 = new Bola(this,this.mScreenX/2, 200, 70,Color.BLACK);
         actores.add(bola3);  bola3.setup();
-        //bola3.setVelActualX(100);
+        bola4 = new Bola(this,this.mScreenX/2, this.mScreenY-700, 50,Color.BLUE);
+        actores.add(bola4);  bola4.setup();
     }
 
     //Realiza la lógica del juego, movimientos, física, colisiones, interacciones..etc
@@ -63,7 +65,8 @@ public class Canasta extends GameView implements OnTouchEventListener {
         //actualizamos los actores
         for (Sprite actor : actores) {
             if(actor.isVisible())
-               actor.update();
+                actor.update();
+               //actor.update2(actor.getVisible());
         }
 
     }
@@ -123,6 +126,17 @@ public class Canasta extends GameView implements OnTouchEventListener {
         //dibujamos puntuacion
         paint.setTextSize(100);
         canvas.drawText("JUEGO CANASTA: ", 100, 100, paint);
+        //cuando puntuacion = 2, ventana volver a jugar. se pausa y se reinicia pulsar boton
+        if(this.bola1.puntuacion==2){
+            canvas.drawText("Volver a jugar:", this.mScreenX/2-100, this.mScreenY-700, paint);
+            bola1.invisible();
+            bola2.invisible();
+            this.bola3.invisible();
+            bola4.visible();
+        }else{
+            bola4.invisible();
+        }
+
         canvas.drawText("CANASTAS: "+this.bola1.puntuacion, 100, 500, paint);
         if(estaDentro){
             paint.setColor(Color.YELLOW);
@@ -147,6 +161,21 @@ public class Canasta extends GameView implements OnTouchEventListener {
             lineY1=bola1.centroY;
             lineX2=bola1.centroX;
             lineY2=bola1.centroY;
+
+        }
+
+        //si se pulsa, se resetea la puntuacion y el juego
+        if (Utilidades.distancia(lineX1,lineY1,bola4.centroX,bola4.centroY)<bola4.radio){
+            estaDentro2=true;
+            lineX1=bola1.centroX;
+            lineY1=bola1.centroY;
+            lineX2=bola1.centroX;
+            lineY2=bola1.centroY;
+            Log.d("reiniciando", "reiniciando...");
+
+           actores.clear();
+
+            setupGame();
 
         }
 

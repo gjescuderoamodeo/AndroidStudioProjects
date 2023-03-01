@@ -69,6 +69,10 @@ public abstract class Sprite implements OnColisionListener {
         this.visible = visible;
     }
 
+    public boolean getVisible() {
+        return visible;
+    }
+
     public int getColor() {
         return color;
     }
@@ -113,6 +117,7 @@ public abstract class Sprite implements OnColisionListener {
 
     public abstract void setup();
     public abstract void update();
+    public abstract void update2(boolean visible);
 
 
 

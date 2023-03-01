@@ -55,6 +55,11 @@ public  class Pala extends Sprite implements OnColisionListener {
 
     }
 
+    @Override
+    public void update2(boolean visible) {
+
+    }
+
 
     @Override
     public void onFireColisionBorder(){
