@@ -86,10 +86,11 @@ public class GalleryFragment extends Fragment implements OnMapReadyCallback, Loc
         previa = (new LatLng(location.getLatitude(), location.getLongitude()));
         map.addMarker(new MarkerOptions().position(previa).title("Posición actual"));
         map.moveCamera(CameraUpdateFactory.newLatLng(previa));
-        posiciones.add(previa);
+        posiciones.add(previa); //añadir al array las posiciones
         map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng ultima) {
+                Log.d(":::posiciones", posiciones + "");
                 map.clear(); // Limpiar marcadores previos
                 posiciones.add(ultima);
                 if (ultima != null) {
