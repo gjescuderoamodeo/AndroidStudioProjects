@@ -5,6 +5,9 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -14,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.testmvvm.R;
 import com.example.testmvvm.databinding.FragmentGalleryBinding;
 import com.example.testmvvm.entidades.Lugar;
 import com.example.testmvvm.entidades.Ruta;
@@ -44,6 +48,8 @@ public class GalleryFragment extends Fragment {
 
         binding = FragmentGalleryBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        //menu
+        setHasOptionsMenu(true);
 
         final TextView textView = binding.Name;
 
@@ -81,6 +87,32 @@ public class GalleryFragment extends Fragment {
         return root;
     }
 
+    //menu
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_gallery, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.option1:
+                Log.d("Opcion_", "opcion1");
+                return true;
+            case R.id.option2:
+                // Acción para la opción 2
+                return true;
+            case R.id.option3:
+                // Acción para la opción 3
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    //
+
     @Override
     public void onResume() {
         super.onResume();
@@ -105,6 +137,7 @@ public class GalleryFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
 
     //room
     /*public void testRoom(){

@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.gallery.GalleryFragment">
 
+
     <EditText
         android:id="@+id/Name"
         android:layout_width="wrap_content"
@@ -43,4 +44,6 @@
         app:layout_constraintStart_toEndOf="@+id/button"
         app:layout_constraintTop_toBottomOf="@+id/Name"
         app:layout_constraintVertical_bias="0.089" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
