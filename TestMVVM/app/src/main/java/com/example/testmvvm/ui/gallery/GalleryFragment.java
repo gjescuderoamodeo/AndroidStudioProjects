@@ -1,5 +1,7 @@
 package com.example.testmvvm.ui.gallery;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,35 +20,40 @@ import com.example.testmvvm.entidades.Ruta;
 import com.example.testmvvm.room.ItinerarioBD;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class GalleryFragment extends Fragment {
 
     private FragmentGalleryBinding binding;
+    private GalleryViewModel galleryViewModel;
+    private ArrayList<String> nombres = new ArrayList<>();
 
-    //
-    GalleryViewModel galleryViewModel;
+    // Contexto para acceder a SharedPreferences
+    private Context context;
 
-    //arrayList de nombres, que se guarda del ViewModel
-    private ArrayList<String> nombres=new ArrayList<>();
+    // Nombre del archivo donde se guardarán los datos en SharedPreferences
+    private static final String SHARED_PREFERENCES_FILE_NAME = "gallery_fragment_data";
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        //instancia de un viewModel
-        GalleryViewModel galleryViewModel =
-                new ViewModelProvider(this).get(GalleryViewModel.class);
+
+        // Instanciamos el ViewModel y lo asignamos a la variable miembro galleryViewModel
+        galleryViewModel = new ViewModelProvider(this).get(GalleryViewModel.class);
 
         binding = FragmentGalleryBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         final TextView textView = binding.Name;
+
+        // Observamos el LiveData del ViewModel para actualizar el TextView
         galleryViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 
-        //
         binding.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String texto= String.valueOf(binding.Name.getText());
+                String texto = String.valueOf(binding.Name.getText());
                 galleryViewModel.addNombre(texto);
             }
         });
@@ -55,23 +62,52 @@ public class GalleryFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                nombres=galleryViewModel.getNombres().getValue();
-                for(String s:nombres){
+                // Obtenemos los nombres desde el ViewModel
+                nombres = galleryViewModel.getNombres().getValue();
+                for (String s : nombres) {
                     Log.d("MVVM_", s);
                 }
 
-                //consulta base datos a traves ViewModel
-                galleryViewModel.getDB(getContext());
-
+                // Obtenemos los datos desde SharedPreferences
+                SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFERENCES_FILE_NAME, Context.MODE_PRIVATE);
+                String sharedPrefData = sharedPreferences.getString("data", "");
+                Log.d("SharedPreferences_", sharedPrefData);
             }
         });
 
-        testRoom();
+        // Asignamos el contexto actual a la variable miembro context
+        context = getContext();
+
         return root;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        // Observamos el LiveData del ViewModel para mostrar los cambios
+        galleryViewModel.getNombres().observe(this.getViewLifecycleOwner(), new Observer<ArrayList<String>>() {
+            @Override
+            public void onChanged(ArrayList<String> strings) {
+                Log.d("MVVM_", "" + strings.toString());
+
+                // Guardamos los datos en SharedPreferences cuando se producen cambios en los nombres
+                SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFERENCES_FILE_NAME, Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("data", strings.toString());
+                editor.apply();
+            }
+        });
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
+
     //room
-    public void testRoom(){
+    /*public void testRoom(){
 
         ItinerarioBD.getIinerarioBD(this.getContext()).daoLugar().nukeTable();
         ItinerarioBD.getIinerarioBD(this.getContext()).daoRuta().nukeTable();
@@ -89,7 +125,7 @@ public class GalleryFragment extends Fragment {
 
         ItinerarioBD.getIinerarioBD(this.getContext()).daoRuta().crearRuta(ruta1);
 
-        /*List<Lugar> lugares=
+        List<Lugar> lugares=
                 ItinerarioBD.getIinerarioBD(this.getContext()).daoLugar().verLugar();
         //Log.d("CoordenadaAPP","hola mundo");
         for (Lugar al:lugares) {
@@ -102,26 +138,6 @@ public class GalleryFragment extends Fragment {
         //Log.d("CoordenadaAPP","hola mundo");
         for (Ruta al:rutas) {
             Log.d("RutasAPP", al.getNombreValue() + " " + al.destinoId + " " + al.origenId);
-        }*/
-    }
-
-    //El observador para que se actualize la info al añadir nuevas cosas al array mutable
-    @Override
-    public void onResume() {
-        super.onResume();
-        galleryViewModel.getNombres().observe(this.getViewLifecycleOwner(), new Observer<ArrayList<String>>() {
-            @Override
-            public void onChanged(ArrayList<String> strings) {
-                // Aquí puedes actualizar la interfaz de usuario con los nuevos datos
-                Log.d("MVVM_", ""+ strings.toString());
-
-            }
-        });
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
-    }
+        }
+    }*/
 }

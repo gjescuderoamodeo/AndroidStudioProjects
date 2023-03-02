@@ -1,6 +1,8 @@
 package com.example.testmvvm.ui.gallery;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
@@ -12,7 +14,9 @@ import com.example.testmvvm.entidades.Ruta;
 import com.example.testmvvm.room.ItinerarioBD;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class GalleryViewModel extends ViewModel {
 
@@ -47,6 +51,15 @@ public class GalleryViewModel extends ViewModel {
         nNombres.getValue().add(nombre);
         nNombres.postValue(nNombres.getValue());
     }
+
+    public void saveNombres(Context context) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = prefs.edit();
+        Set<String> setNombres = new HashSet<>(nNombres.getValue());
+        editor.putStringSet("nombres", setNombres);
+        editor.apply();
+    }
+
 
     public void getDB(Context context){
         List<Lugar> lugares=
