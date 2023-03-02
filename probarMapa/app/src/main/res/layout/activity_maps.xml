@@ -13,6 +13,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <!-- Agregar cualquier otro contenido aquí -->
+
     <fragment
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:map="http://schemas.android.com/apk/res-auto"
@@ -23,4 +25,19 @@
         android:layout_height="match_parent"
         tools:context=".MapsActivity" />
 
+    <!--<menu xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+        <item
+            android:id="@+id/menu_item1"
+            android:title="Colocar Posicion" />
+        <item
+            android:id="@+id/menu_item2"
+            android:title="Opción 2" />
+        <item
+            android:id="@+id/menu_item3"
+            android:title="Opción 3" />
+
+    </menu>-->
+
 </LinearLayout>
+
