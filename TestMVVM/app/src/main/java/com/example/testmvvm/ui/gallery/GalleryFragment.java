@@ -21,7 +21,11 @@ import com.example.testmvvm.R;
 import com.example.testmvvm.databinding.FragmentGalleryBinding;
 import com.example.testmvvm.entidades.Lugar;
 import com.example.testmvvm.entidades.Ruta;
+import com.example.testmvvm.entidades.RutaExamen;
 import com.example.testmvvm.room.ItinerarioBD;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -33,6 +37,10 @@ public class GalleryFragment extends Fragment {
     private FragmentGalleryBinding binding;
     private GalleryViewModel galleryViewModel;
     private ArrayList<String> nombres = new ArrayList<>();
+
+    //FIRESTORE
+    private FirebaseFirestore db;
+    private CollectionReference collectionReference;
 
     // Contexto para acceder a SharedPreferences
     private Context context;
@@ -51,16 +59,30 @@ public class GalleryFragment extends Fragment {
         //menu
         setHasOptionsMenu(true);
 
-        final TextView textView = binding.Name;
+        //firestore
+        db = FirebaseFirestore.getInstance();
+        collectionReference = db.collection("ruta");
+
+        //final TextView textView = binding.Name;
 
         // Observamos el LiveData del ViewModel para actualizar el TextView
-        galleryViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        //galleryViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 
+        //al pulsar el boton1, se añaden datos al firebase
         binding.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String texto = String.valueOf(binding.Name.getText());
-                galleryViewModel.addNombre(texto);
+                String longitud = String.valueOf(binding.Name.getText());
+                String lat = String.valueOf(binding.lat.getText());
+                String rumbo = String.valueOf(binding.rumbo.getText());
+                String distancia = String.valueOf(binding.distancia.getText());
+
+                RutaExamen rutaExamen =
+                        new RutaExamen(Integer.valueOf(longitud),Integer.valueOf(lat),rumbo,Integer.valueOf(distancia));
+
+                addRuta(rutaExamen);
+
+                //galleryViewModel.addNombre(texto);
             }
         });
 
@@ -69,15 +91,19 @@ public class GalleryFragment extends Fragment {
             public void onClick(View view) {
 
                 // Obtenemos los nombres desde el ViewModel
-                nombres = galleryViewModel.getNombres().getValue();
+                /*nombres = galleryViewModel.getNombres().getValue();
                 for (String s : nombres) {
                     Log.d("MVVM_", s);
-                }
+                }*/
+
+                //Log de rutas
+                getRutas();
+
 
                 // Obtenemos los datos desde SharedPreferences
-                SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFERENCES_FILE_NAME, Context.MODE_PRIVATE);
+                /*SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFERENCES_FILE_NAME, Context.MODE_PRIVATE);
                 String sharedPrefData = sharedPreferences.getString("data", "");
-                Log.d("SharedPreferences_", sharedPrefData);
+                Log.d("SharedPreferences_", sharedPrefData);*/
             }
         });
 
@@ -138,39 +164,32 @@ public class GalleryFragment extends Fragment {
         binding = null;
     }
 
+    //Get Rutas 3 Examen
+    public void getRutas(){
+        collectionReference.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                List<RutaExamen> rutas = new ArrayList<>();
+                for (QueryDocumentSnapshot document : task.getResult()) {
+                    RutaExamen ruta = document.toObject(RutaExamen.class);
+                    rutas.add(ruta);
+                    Log.d("TAG", "Rutas: " + ruta.getAll());
+                }
+                //Log.d("TAG", "Rutas: " + rutas);
+            } else {
+                Log.w("TAG", "Error getting documents.", task.getException());
+            }
+        });
 
-    //room
-    /*public void testRoom(){
+    }
 
-        ItinerarioBD.getIinerarioBD(this.getContext()).daoLugar().nukeTable();
-        ItinerarioBD.getIinerarioBD(this.getContext()).daoRuta().nukeTable();
+    public void addRuta(RutaExamen ruta){
+        collectionReference.add(ruta)
+                .addOnSuccessListener(documentReference -> {
+                    Log.d("TAG", "DocumentSnapshot added with ID: " + documentReference.getId());
+                })
+                .addOnFailureListener(e -> {
+                    Log.w("TAG", "Error adding document", e);
+                });
+    }
 
-        Lugar lugar1 = new Lugar(23,20,"Sevilla");
-        Lugar lugar2 = new Lugar(23,20,"Cordoba");
-
-        ItinerarioBD.getIinerarioBD(this.getContext()).daoLugar().crearLugar(lugar1);
-        ItinerarioBD.getIinerarioBD(this.getContext()).daoLugar().crearLugar(lugar2);
-
-        Lugar id1 = ItinerarioBD.getIinerarioBD(this.getContext()).daoLugar().verLugar("Sevilla");
-        Lugar id2 = ItinerarioBD.getIinerarioBD(this.getContext()).daoLugar().verLugar("Cordoba");
-
-        Ruta ruta1 = new Ruta(id1.getId(), id2.getId(), "Test");
-
-        ItinerarioBD.getIinerarioBD(this.getContext()).daoRuta().crearRuta(ruta1);
-
-        List<Lugar> lugares=
-                ItinerarioBD.getIinerarioBD(this.getContext()).daoLugar().verLugar();
-        //Log.d("CoordenadaAPP","hola mundo");
-        for (Lugar al:lugares) {
-            Log.d("RutasAPP", al.id + " " + "");
-        }
-
-
-        List<Ruta> rutas=
-                ItinerarioBD.getIinerarioBD(this.getContext()).daoRuta().verRuta();
-        //Log.d("CoordenadaAPP","hola mundo");
-        for (Ruta al:rutas) {
-            Log.d("RutasAPP", al.getNombreValue() + " " + al.destinoId + " " + al.origenId);
-        }
-    }*/
 }

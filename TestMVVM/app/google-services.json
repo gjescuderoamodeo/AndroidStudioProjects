@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "129181134736",
+    "project_id": "rutas-guillermo-jose-escudero",
+    "storage_bucket": "rutas-guillermo-jose-escudero.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:129181134736:android:5388e7c40889c0e3e5cd15",
+        "android_client_info": {
+          "package_name": "com.example.testmvvm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "129181134736-oe824pr98fbckre1h6rdn3rbpkr03kq1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxv1Ndwt4See019LzWN_vS0qTNCqihJSw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "129181134736-oe824pr98fbckre1h6rdn3rbpkr03kq1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

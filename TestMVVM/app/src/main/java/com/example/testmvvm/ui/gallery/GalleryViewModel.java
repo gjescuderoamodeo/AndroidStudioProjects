@@ -9,6 +9,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.testmvvm.DAO.DaoExamen;
 import com.example.testmvvm.entidades.Lugar;
 import com.example.testmvvm.entidades.Ruta;
 import com.example.testmvvm.room.ItinerarioBD;
