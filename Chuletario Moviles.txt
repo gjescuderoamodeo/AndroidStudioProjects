@@ -1,0 +1,19 @@
+-Ciclos de vida -> Ejercicio_TEST_ciclodevida....
+
+-Modo dia noche/cambio fragments -> PruebaFragment2
+
+-Toolbar con opciones y cuadros de dialogo -> PruebaToolbar1
+
+-Navegar entre fragmentos con botones -> NavigattionFragments2
+
+////
+-NavigattionDrawer con slideshow con 2 tabs y un alert en opcion2. Tambien tiene un botón gallery, tambien tiene conexion sqLite con alimentos y su recycleView -> NavigattionDrawerTest
+////
+
+
+
+- Activities con retorno y cosas de formulario -> Formulario usuarios
+
+
+
+-Recoger datos de forma simple en arrayList -> ProyectoAmpliado
