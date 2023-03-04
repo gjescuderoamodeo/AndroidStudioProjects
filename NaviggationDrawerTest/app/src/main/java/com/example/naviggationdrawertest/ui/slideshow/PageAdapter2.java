@@ -9,6 +9,9 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.example.naviggationdrawertest.ui.gallery.GalleryFragment;
 import com.example.naviggationdrawertest.ui.home.HomeFragment;
+import com.example.naviggationdrawertest.ui.home.ProfesorFragment;
+import com.example.naviggationdrawertest.ui.home.VerFragmento;
+import com.example.naviggationdrawertest.ui.home.createAlimento;
 
 public class PageAdapter2 extends FragmentStateAdapter {
 
@@ -29,21 +32,22 @@ public class PageAdapter2 extends FragmentStateAdapter {
 
         switch(position){
             case 0:
-                return new HomeFragment();
+                //return new ProfesorFragment();
+                //return new HomeFragment();
+                return new VerFragmento();
             case 1:
                 return new GalleryFragment();
+            case 2:
+                return new createAlimento();
         }
-
-
-
-
 
         return null;
 
     }
 
+    //aqui se le añaden más tabs
     @Override
     public int getItemCount() {
-        return 2;
+        return 3;
     }
 }

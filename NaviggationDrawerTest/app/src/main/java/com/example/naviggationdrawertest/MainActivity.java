@@ -1,14 +1,22 @@
 package com.example.naviggationdrawertest;
 
+import static androidx.core.content.ContentProviderCompat.requireContext;
+
 import android.os.Bundle;
+import android.text.Editable;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.widget.EditText;
+import android.widget.Toast;
 
+import com.example.naviggationdrawertest.databinding.ActivityMainBinding;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -16,7 +24,6 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.naviggationdrawertest.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -38,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
         // Passing each menu ID as a set of Ids because each
@@ -72,6 +81,8 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("Opcion_", "opcion1");
                 return true;
             case R.id.option2:
+                Log.d("Opcion_", "opcion2");
+                añadirPosiciones();
                 return true;
             case R.id.option3:
                 // Acción para la opción 3
@@ -80,5 +91,36 @@ public class MainActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void añadirPosiciones() {
+        AlertDialog dialogo = alerta();
+        dialogo.show();
+    }
+
+    //Alerta de dialogo
+    private AlertDialog alerta() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        //View view=inflater.inflate(R.layout.activity_formulario_add_posicion,null);
+        View view=inflater.inflate(R.layout.fragment_create_alimento,null);
+
+        builder
+                .setView(view)
+                .setTitle("Información")
+                .setPositiveButton("OK",(dialog,id)->{
+                    //EditText editText=(EditText)(view.findViewById(R.id.descripcion));
+                    //Editable texto=editText.getText();
+                    //p.setDescripcion(texto.toString()); p es el atributo de un objeto si le pasara uno
+                    //Toast.makeText(this,"Posición guardada:  "+ texto, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this,"Alimento guardado:  ", Toast.LENGTH_SHORT).show();
+                })
+                .setNegativeButton("Cancelar",(dialog,id)->{
+                    dialog.cancel();
+                });
+
+        AlertDialog dialogo= builder.create();
+        dialogo.show();
+        return dialogo;
     }
 }
