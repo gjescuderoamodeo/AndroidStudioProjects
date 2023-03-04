@@ -1,6 +1,8 @@
 package com.example.naviggationdrawertest;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 
@@ -61,5 +63,22 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.option1:
+                Log.d("Opcion_", "opcion1");
+                return true;
+            case R.id.option2:
+                return true;
+            case R.id.option3:
+                // Acción para la opción 3
+                Log.d("Opcion_", "opcion3");
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
