@@ -1,6 +1,6 @@
 -Ciclos de vida -> Ejercicio_TEST_ciclodevida....
 
--Modo dia noche/cambio fragments -> PruebaFragment2
+-Modo dia noche/cambio fragments, comunicacion o algo así -> PruebaFragment2
 
 -Toolbar con opciones y cuadros de dialogo -> PruebaToolbar1
 

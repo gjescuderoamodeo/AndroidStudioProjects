@@ -1,5 +1,6 @@
 package com.example.naviggationdrawertest.ui.gallery;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +12,11 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.naviggationdrawertest.MainActivity;
 import com.example.naviggationdrawertest.databinding.FragmentGalleryBinding;
+import com.example.naviggationdrawertest.ui.home.HomeFragment;
+
+import java.io.Serializable;
 
 public class GalleryFragment extends Fragment {
 
@@ -33,6 +38,11 @@ public class GalleryFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Toast.makeText(requireContext(),"Botón pulsado", Toast.LENGTH_SHORT).show();
+
+                //así me voy a otro activity (en este caso el main) no valen fragmentos (?)
+                Intent intent=new Intent(getContext(), MainActivity.class);
+                intent.putExtra("alimento",(Serializable) "test");
+                startActivity(intent);
             }
         });
 
