@@ -71,7 +71,7 @@ public class SlideshowFragment extends Fragment {
     }
 
     //menu
-    @Override
+    /*@Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         //en main tengo el menu principal
         //inflater.inflate(R.menu.main, menu);
@@ -124,6 +124,6 @@ public class SlideshowFragment extends Fragment {
         AlertDialog dialogo= builder.create();
         dialogo.show();
         return dialogo;
-    }
+    }*/
 
 }

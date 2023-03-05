@@ -109,10 +109,6 @@ public class MainActivity extends AppCompatActivity {
                 .setView(view)
                 .setTitle("Información")
                 .setPositiveButton("OK",(dialog,id)->{
-                    //EditText editText=(EditText)(view.findViewById(R.id.descripcion));
-                    //Editable texto=editText.getText();
-                    //p.setDescripcion(texto.toString()); p es el atributo de un objeto si le pasara uno
-                    //Toast.makeText(this,"Posición guardada:  "+ texto, Toast.LENGTH_SHORT).show();
                     Toast.makeText(this,"Alimento guardado:  ", Toast.LENGTH_SHORT).show();
                 })
                 .setNegativeButton("Cancelar",(dialog,id)->{
