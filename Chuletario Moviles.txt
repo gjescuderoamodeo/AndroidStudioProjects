@@ -23,3 +23,5 @@
 
 
 - Todo lo necesario Room -> RoomTest3
+
+- Uso de JDBC -> GestionLibros
