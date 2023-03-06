@@ -60,12 +60,6 @@ public class VerFragmento extends Fragment {
         Dao.setGestorBD(new GestionAlimentossBD(getContext()));
         Dao.gestorBd.getWritableDatabase();
 
-        //DaoAlimentoSQL daoAl = new DaoAlimentoSQL(getContext());
-        //Alimento alimento = new Alimento();
-        //alimento.setNombre("aa");
-        //alimento.setKcal(220);
-
-        //daoAl.crearAlimento(alimento);
     }
 
     public void addAlimento(Alimento alimento) {

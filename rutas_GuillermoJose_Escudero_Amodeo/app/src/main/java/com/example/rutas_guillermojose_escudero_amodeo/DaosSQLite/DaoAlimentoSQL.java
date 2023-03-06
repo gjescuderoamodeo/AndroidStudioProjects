@@ -52,6 +52,31 @@ public class DaoAlimentoSQL extends Dao implements IDaoAlimento {
         return alimento;
     }
 
+
+    public int distanciaTotal() {
+        ArrayList<Alimento> alimentos = new ArrayList<>();
+        conexion = gdep.getReadableDatabase();
+        Cursor cursor = conexion.rawQuery("SELECT * FROM Alimentos", null);
+        if(cursor.moveToFirst()){
+            do{
+                Alimento alimento = new Alimento();
+                alimento.setNombre(cursor.getString(0));
+                alimento.setKcal(cursor.getInt(1));
+                alimentos.add(alimento);
+            }while(cursor.moveToNext());
+        }
+        cursor.close();
+        conexion.close();
+
+        int distanciaT = 0;
+
+        for(int i=0;i<alimentos.size();i++){
+            distanciaT+=alimentos.get(i).getKcal();
+        }
+
+        return distanciaT;
+    }
+
     @Override
     public ArrayList<Alimento> verAlimentos() {
         ArrayList<Alimento> alimentos = new ArrayList<>();
