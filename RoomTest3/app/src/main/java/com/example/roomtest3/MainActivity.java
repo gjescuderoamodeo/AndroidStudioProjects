@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         });*/
 
         //test de Room
-        //testRoom();
+        testRoom();
 
     }
 
