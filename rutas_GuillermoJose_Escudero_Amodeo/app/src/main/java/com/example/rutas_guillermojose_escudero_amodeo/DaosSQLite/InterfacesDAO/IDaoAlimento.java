@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public interface IDaoAlimento {
 
     public void crearAlimento(Alimento dep);
-    public void eliminarAlimento(int id);
+    public void eliminarAlimento(String lugar);
     public Alimento verAlimento(int id);
     public ArrayList<Alimento> verAlimentos();
 

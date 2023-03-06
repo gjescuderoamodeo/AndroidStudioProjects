@@ -85,6 +85,7 @@ public class VerFragmento extends Fragment {
         actualizarRecyclerView();
     }
 
+
     private void actualizarRecyclerView() {
         DaoAlimentoSQL daoAl = new DaoAlimentoSQL(getContext());
         ArrayList<Alimento> al = daoAl.verAlimentos();

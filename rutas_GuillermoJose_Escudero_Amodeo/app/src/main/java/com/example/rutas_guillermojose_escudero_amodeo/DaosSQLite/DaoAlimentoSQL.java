@@ -31,9 +31,9 @@ public class DaoAlimentoSQL extends Dao implements IDaoAlimento {
     }
 
     @Override
-    public void eliminarAlimento(int id) {
+    public void eliminarAlimento(String lugar) {
         conexion = gdep.getWritableDatabase();
-        conexion.delete("Alimentos", "_id=" + id, null);
+        conexion.delete("Alimentos", "nombre='" + lugar+"'", null);
         conexion.close();
     }
 

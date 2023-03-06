@@ -52,6 +52,15 @@ public class GalleryFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        //saco la distancia de la consulta sqlite y le doy ese valor a textView3
+        int distanciaT = sacarDistanciaT();
+        TextView textView = binding.textView3;
+        textView.setText(String.valueOf(distanciaT));
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
