@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
                ItinerarioBD.getIinerarioBD(getApplicationContext()).daoLugar().verLugar();
         //Log.d("CoordenadaAPP","hola mundo");
         for (Lugar al:lugares) {
-           Log.d("RutasAPP", al.id + " " + "");
+           Log.d("RutasAPP", al.nombre + " " + "");
         }
 
 

@@ -17,3 +17,9 @@
 
 
 -Recoger datos de forma simple en arrayList -> ProyectoAmpliado
+
+
+////////////////
+
+
+- Todo lo necesario Room -> RoomTest3
