@@ -32,7 +32,7 @@ public class PageAdapter2 extends FragmentStateAdapter {
                 //return new HomeFragment();
                 return new createAlimento();
             case 1:
-                return new SlideshowFragment();
+                return new VerFragmento();
         }
 
         return null;

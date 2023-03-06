@@ -86,7 +86,7 @@ public class createAlimento extends Fragment {
         kcalAl = Integer.parseInt(kcal.getText().toString());
         al.setKcal(kcalAl);
 
-        // Creamos el nuevo alimento
+        // Creamos el nuevo lugar
         Alimento alimento = new Alimento();
         alimento.setKcal(kcalAl);
         alimento.setNombre(nombreAl);
@@ -95,7 +95,7 @@ public class createAlimento extends Fragment {
         daoAlimento.crearAlimento(alimento);
 
         // Notificamos al usuario que se ha creado un nuevo alimento
-        Toast.makeText(getContext(), "Alimento creado con éxito", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "Lugar añadido con éxito", Toast.LENGTH_SHORT).show();
     }
 
     public void cancelar() {
