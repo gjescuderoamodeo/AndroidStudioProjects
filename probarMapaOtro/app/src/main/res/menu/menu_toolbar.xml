@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item
+        android:id="@+id/posicionLogLat"
+        android:icon="@drawable/ic_posicionloglat"
+        android:orderInCategory="100"
+        app:showAsAction="always"
+        android:title="Posicion Logitud/Latitud" />
+
+
+
+    <item
+        android:id="@+id/borrarPosiciones"
+        android:icon="@drawable/ic_remove_location"
+        android:orderInCategory="100"
+        app:showAsAction="always"
+        android:title="borrarPosiciones" />
+
+
+    <item
+        android:id="@+id/ubicacionActual"
+        android:icon="@drawable/ic_ubi_actual"
+        android:orderInCategory="100"
+        app:showAsAction="always"
+        android:title="ubicacionActual" />
+
+
+    <item
+        android:id="@+id/posicionDistRumbo"
+        android:icon="@drawable/ic_dist_rumbo"
+        android:orderInCategory="100"
+        app:showAsAction="always"
+        android:title="Posicion Distancia/Rumbo" />
+</menu>

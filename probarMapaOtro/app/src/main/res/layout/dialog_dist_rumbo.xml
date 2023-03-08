@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Colocar Posicion DIST-RUMBO"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="DISTANCIA:"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/et_distancia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="DISTANCIA"
+        android:inputType="number" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="RUMBO:"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/et_rumbo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="RUMBO"
+        android:inputType="number" />
+
+    <Button
+        android:id="@+id/b_aceptar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FF8A80"
+        android:backgroundTint="#A13131"
+        android:backgroundTintMode="add"
+        android:text="aceptar"
+        android:textColor="#FFEB3B" />
+
+    <Button
+        android:id="@+id/b_cancelar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="cancelar"
+        android:textColor="#FFEB3B" />
+</LinearLayout>
