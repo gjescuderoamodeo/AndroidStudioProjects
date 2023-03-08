@@ -18,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -30,6 +31,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.recuexamenmapas_guillermojoseescuderoamodeo.databinding.ActivityMainBinding;
+import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.maps.android.SphericalUtil;
 
@@ -49,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     Button aceptar, cancelar;
     Dialog dialog;
     private ArrayList<LatLng> posiciones = new ArrayList<>();
-    private LatLng previa, siguiente, ultima;
+    private LatLng previa, ultima;
 
     private Spinner spinnerRumbo;
     private String[] rumboOptions = {"Norte", "Noreste", "Este", "Sureste", "Sur", "Suroeste", "Oeste", "Noroeste"};
@@ -111,7 +113,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 borrarPosicionesMapa();
                 break;
             case R.id.ubicacionActual:
-                //ubicacionActual();
+                ubicacionActual();
                 break;
             case R.id.posicionDistRumbo:
                 ejercicio3();
@@ -133,8 +135,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         //al estar listo el mapa,
         LatLng defecto = new LatLng(0, 0);
-        LatLng posicion1 = new LatLng(53.499424, 1.873112);
-        mMap.addMarker(new MarkerOptions().position(posicion1).title("Marker in 53.499424/1.873112"));
+        posiciones.add(defecto);
+        mMap.addMarker(new MarkerOptions().position(defecto).title("marcador en 0/0"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(defecto));
 
     }
@@ -186,7 +188,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         cancelar = dialog.findViewById(R.id.b_cancelar);
         etdistancia = dialog.findViewById(R.id.et_distancia);
         etrumbo = dialog.findViewById(R.id.et_rumbo);
-        String dirRumboSpinner = dialog.findViewById(R.id.dir_rumbo);
+        Spinner spinner = (Spinner) findViewById(R.id.dir_rumbo);
+
 
         //lo trae al frente
         dialog.show();
@@ -197,7 +200,59 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                 double dist = Double.parseDouble(etdistancia.getText().toString());
                 double rum = Double.parseDouble(etrumbo.getText().toString());
-                String dirRumbo = String.valueOf((Spinner) findViewById(R.id.dir_rumbo));;
+
+                ultima = new LatLng(dist, rum);
+                previa = new LatLng(0, 0);
+
+                posiciones.add(ultima);
+                if (ultima != null) {
+
+                    dist = SphericalUtil.computeDistanceBetween(ultima, previa);
+                    dist /= 1000;
+                    distanciaTotal += dist;
+                    rum=SphericalUtil.computeHeading(previa, ultima);
+                    if (rum<0)rum+=360;
+                    previa = ultima;
+                    MarkerOptions markerOptions = new MarkerOptions().position(ultima);
+                    mMap.addMarker(markerOptions);
+                    dialog.dismiss();
+                    Toast.makeText(MainActivity.this, "Distancia: " + dist+ "Rumbo: "+rum, Toast.LENGTH_SHORT).show();
+
+                    //LatLng latLng3 = new LatLng(53.979900, -0.757300);
+                    //LatLng latLng2 = new LatLng(40.7128, -74.0060);
+
+                    if(posiciones.size()<=2) {
+                        mMap.addPolyline(new PolylineOptions()
+                                .add(posiciones.get(posiciones.size() - 1), posiciones.get(posiciones.size() - 2))
+                                .color(Color.GREEN)
+                                .width(10f));
+                    }else{
+                        mMap.addPolyline(new PolylineOptions()
+                                .add(posiciones.get(posiciones.size() - 1), posiciones.get(posiciones.size() - 2))
+                                .color(Color.YELLOW)
+                                .width(10f));
+                    }
+                }
+            }
+        });
+
+                //a android no le apetece cogerme el valor del spinner
+                /*
+                Spinner dirRumboSpinner =(Spinner)findViewById(R.id.dir_rumbo);
+                dirRumboSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        String dirRumbo = parent.getItemAtPosition(position).toString();
+                        // Utiliza el valor de dirRumbo como necesites
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+                        // No hacer nada si no se ha seleccionado ninguna opción
+                    }
+                });
+
+                String dirRumbo = dirRumboSpinner.getSelectedItem().toString();
 
                 dialog = new Dialog(MainActivity.this);
                 dialog.setContentView(R.layout.ejercicio3);
@@ -214,7 +269,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 posiciones.add(ultima);
                 if (ultima != null) {
 
-                    double distanciaConRespectoUltimaPosicion = Double.parseDouble(etdistanciaConRespectoUltimaPosicion.getText().toString());
+                    double distanciaConRespectoUltimaPosicion = 22.2;
                     double rumboEnGrados = getRumboEnGrados(dirRumbo);
 
                     LatLng nuevaPosicion = SphericalUtil.computeOffset(ultima, distanciaConRespectoUltimaPosicion, rumboEnGrados);
@@ -243,7 +298,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 }
 
             }
-        });
+        });*/
 
         cancelar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -257,7 +312,31 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     //ej5
     public void borrarPosicionesMapa(){
         mMap.clear();
+        posiciones.clear();
         Toast.makeText(this,"Posiciones borradas",Toast.LENGTH_SHORT).show();
+
+    }
+
+    //ej4
+    public void ubicacionActual(){
+
+        latitud=referencia.getLatitude();
+        longitud=referencia.getLongitude();
+
+        LatLng actual = new LatLng(latitud, longitud);
+        mMap.addMarker(new MarkerOptions().position(actual).title("marcador en posicion actual"));
+
+        posiciones.add(actual);
+
+        if(posiciones.size()>1) {
+            mMap.addPolyline(new PolylineOptions()
+                    .add(posiciones.get(posiciones.size() - 1), posiciones.get(posiciones.size() - 2))
+                    .color(Color.MAGENTA)
+                    .width(20f));
+        }
+
+
+        Toast.makeText(MainActivity.this,"ubicacion actual cogida",Toast.LENGTH_SHORT).show();
 
     }
 
