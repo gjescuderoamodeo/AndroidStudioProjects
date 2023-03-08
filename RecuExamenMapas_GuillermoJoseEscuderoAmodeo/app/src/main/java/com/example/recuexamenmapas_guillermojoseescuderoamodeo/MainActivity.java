@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -49,7 +50,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     Dialog dialog;
     private ArrayList<LatLng> posiciones = new ArrayList<>();
     private LatLng previa, siguiente, ultima;
-    private String dirRumbo;
+
+    private Spinner spinnerRumbo;
+    private String[] rumboOptions = {"Norte", "Noreste", "Este", "Sureste", "Sur", "Suroeste", "Oeste", "Noroeste"};
+
 
 
     @Override
@@ -182,7 +186,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         cancelar = dialog.findViewById(R.id.b_cancelar);
         etdistancia = dialog.findViewById(R.id.et_distancia);
         etrumbo = dialog.findViewById(R.id.et_rumbo);
-        dirRumboSpinner = dialog.findViewById(R.id.spinner_dir_rumbo);
+        String dirRumboSpinner = dialog.findViewById(R.id.dir_rumbo);
 
         //lo trae al frente
         dialog.show();
@@ -193,7 +197,16 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                 double dist = Double.parseDouble(etdistancia.getText().toString());
                 double rum = Double.parseDouble(etrumbo.getText().toString());
-                String dirRumbo = dirRumboSpinner.getSelectedItem().toString();
+                String dirRumbo = String.valueOf((Spinner) findViewById(R.id.dir_rumbo));;
+
+                dialog = new Dialog(MainActivity.this);
+                dialog.setContentView(R.layout.ejercicio3);
+                dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+
+                aceptar = dialog.findViewById(R.id.b_aceptar);
+                cancelar = dialog.findViewById(R.id.b_cancelar);
+                etdistancia = dialog.findViewById(R.id.et_distancia);
+                etrumbo = dialog.findViewById(R.id.et_rumbo);
 
                 ultima = new LatLng(dist, rum);
                 previa = new LatLng(0, 0);
