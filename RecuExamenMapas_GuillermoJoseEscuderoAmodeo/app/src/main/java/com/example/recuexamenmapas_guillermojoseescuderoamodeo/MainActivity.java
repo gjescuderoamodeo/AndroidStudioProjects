@@ -18,10 +18,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -174,20 +172,17 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     //ej3
-    public void ejercicio3(){
+    public void ejercicio3() {
 
         dialog = new Dialog(MainActivity.this);
         dialog.setContentView(R.layout.ejercicio3);
-        dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
         aceptar = dialog.findViewById(R.id.b_aceptar);
         cancelar = dialog.findViewById(R.id.b_cancelar);
         etdistancia = dialog.findViewById(R.id.et_distancia);
         etrumbo = dialog.findViewById(R.id.et_rumbo);
-        dirRumbo = dialog.findViewById(R.id.dir_rumbo);
-
-
-
+        dirRumboSpinner = dialog.findViewById(R.id.spinner_dir_rumbo);
 
         //lo trae al frente
         dialog.show();
@@ -195,40 +190,45 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         aceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 double dist = Double.parseDouble(etdistancia.getText().toString());
                 double rum = Double.parseDouble(etrumbo.getText().toString());
+                String dirRumbo = dirRumboSpinner.getSelectedItem().toString();
 
                 ultima = new LatLng(dist, rum);
                 previa = new LatLng(0, 0);
 
                 posiciones.add(ultima);
-
                 if (ultima != null) {
-                    dist = SphericalUtil.computeDistanceBetween(ultima, previa);
-                    dist /= 1000;
-                    distanciaTotal += dist;
+
+                    double distanciaConRespectoUltimaPosicion = Double.parseDouble(etdistanciaConRespectoUltimaPosicion.getText().toString());
+                    double rumboEnGrados = getRumboEnGrados(dirRumbo);
+
+                    LatLng nuevaPosicion = SphericalUtil.computeOffset(ultima, distanciaConRespectoUltimaPosicion, rumboEnGrados);
+                    posiciones.add(nuevaPosicion);
+
+                    distancia = SphericalUtil.computeDistanceBetween(ultima, previa) + distanciaConRespectoUltimaPosicion;
+                    distanciaTotal += distancia / 1000;
+
                     rum = SphericalUtil.computeHeading(previa, ultima);
                     if (rum < 0) rum += 360;
+
                     previa = ultima;
+                    ultima = nuevaPosicion;
 
-                    // Agregar marcador y línea
-                    MarkerOptions markerOptions = new MarkerOptions()
-                            .position(ultima)
-                            .title("Rumbo: " + dirRumbo);
+                    MarkerOptions markerOptions = new MarkerOptions().position(nuevaPosicion);
                     mMap.addMarker(markerOptions);
-
-                    PolylineOptions polylineOptions = new PolylineOptions()
-                            .addAll(posiciones)
-                            .color(Color.RED);
-                    mMap.addPolyline(polylineOptions);
-
                     dialog.dismiss();
 
                     DecimalFormat df = new DecimalFormat("#.##");
-                    String distanciaFormat = df.format(dist);
+                    String distanciaFormat = df.format(distancia / 1000);
 
-                    Toast.makeText(MainActivity.this, "Distancia: " + distanciaFormat + "Rumbo: " + rum, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Distancia: " + distanciaFormat + " km Rumbo: " + rum, Toast.LENGTH_SHORT).show();
+
+                    PolylineOptions polylineOptions = new PolylineOptions().addAll(posiciones).color(Color.RED);
+                    mMap.addPolyline(polylineOptions);
                 }
+
             }
         });
 
@@ -247,4 +247,39 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         Toast.makeText(this,"Posiciones borradas",Toast.LENGTH_SHORT).show();
 
     }
+
+    //obtener rumbo
+    private double getRumboEnGrados(String rumbo) {
+        double rumboEnGrados = 0;
+
+        switch(rumbo) {
+            case "Norte":
+                rumboEnGrados = 0;
+                break;
+            case "Noreste":
+                rumboEnGrados = 45;
+                break;
+            case "Este":
+                rumboEnGrados = 90;
+                break;
+            case "Sureste":
+                rumboEnGrados = 135;
+                break;
+            case "Sur":
+                rumboEnGrados = 180;
+                break;
+            case "Suroeste":
+                rumboEnGrados = 225;
+                break;
+            case "Oeste":
+                rumboEnGrados = 270;
+                break;
+            case "Noroeste":
+                rumboEnGrados = 315;
+                break;
+        }
+
+        return rumboEnGrados;
+    }
+
 }
