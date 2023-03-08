@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <group android:checkableBehavior="single">
     <item
         android:id="@+id/posicionLogLat"
         android:icon="@drawable/ic_posicionloglat"
         android:orderInCategory="100"
         app:showAsAction="always"
-        android:title="Posicion Logitud/Latitud" />
+        android:title="Ej1" />
 
-    <item
-        android:id="@+id/borrarPosiciones"
-        android:icon="@drawable/ic_remove_location"
-        android:orderInCategory="100"
-        app:showAsAction="always"
-        android:title="borrarPosiciones" />
-
+        <item
+            android:id="@+id/posicionDistRumbo"
+            android:icon="@drawable/ic_dist_rumbo"
+            android:orderInCategory="100"
+            app:showAsAction="always"
+            android:title="Ej2" />
 
     <item
         android:id="@+id/ubicacionActual"
@@ -25,10 +26,13 @@
         android:title="ubicacionActual" />
 
 
-    <item
-        android:id="@+id/posicionDistRumbo"
-        android:icon="@drawable/ic_dist_rumbo"
-        android:orderInCategory="100"
-        app:showAsAction="always"
-        android:title="Posicion Distancia/Rumbo" />
+
+        <item
+            android:id="@+id/borrarPosiciones"
+            android:icon="@drawable/ic_remove_location"
+            android:orderInCategory="100"
+            app:showAsAction="always"
+            android:title="borrarPosiciones" />
+
+    </group>
 </menu>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="rumbo_prompt">Elige la dirección del rumbo</string>
+    <string-array name="rumbo_options">
+        <item>Norte</item>
+        <item>Noreste</item>
+        <item>Este</item>
+        <item>Sureste</item>
+        <item>Sur</item>
+        <item>Suroeste</item>
+        <item>Oeste</item>
+        <item>Noroeste</item>
+    </string-array>
+</resources>

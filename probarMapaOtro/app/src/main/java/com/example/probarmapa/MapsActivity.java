@@ -93,17 +93,17 @@ public class MapsActivity extends  AppCompatActivity implements OnMapReadyCallba
     }//end_onCreate
 
 
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
+        @Override
+        public void onMapReady(GoogleMap googleMap) {
+            mMap = googleMap;
 
-        LatLng defaul = new LatLng(0, 0);
-        LatLng posicion1 = new LatLng(53.499424, 1.873112);
-        mMap.addMarker(new MarkerOptions().position(posicion1).title("Marker in 53.499424/1.873112"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(defaul));
+            LatLng defaul = new LatLng(0, 0);
+            LatLng posicion1 = new LatLng(53.499424, 1.873112);
+            mMap.addMarker(new MarkerOptions().position(posicion1).title("Marker in 53.499424/1.873112"));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(defaul));
 
 
-    }//end_onMapReady
+        }//end_onMapReady
 
 
 
