@@ -103,8 +103,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
-
         switch (item.getItemId()) {
             case R.id.posicionLogLat:
                 ejercicio2();
@@ -118,7 +116,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             case R.id.posicionDistRumbo:
                 ejercicio3();
                 break;
-
         }
         return true;
     }
@@ -132,13 +129,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
-        //al estar listo el mapa,
+        //al estar listo el mapa, se añade posicion por defecto
         LatLng defecto = new LatLng(0, 0);
-        posiciones.add(defecto);
-        mMap.addMarker(new MarkerOptions().position(defecto).title("marcador en 0/0"));
+        //posiciones.add(defecto);
+        //mMap.addMarker(new MarkerOptions().position(defecto).title("marcador en 0/0"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(defecto));
-
     }
 
     //ej2
@@ -149,8 +144,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         aceptar = dialog.findViewById(R.id.aceptar);
         cancelar = dialog.findViewById(R.id.cancelar);
-        etlatitud = dialog.findViewById(R.id.et_rumbo);
-        etlongitud = dialog.findViewById(R.id.et_distancia);
+        etlatitud = dialog.findViewById(R.id.latitud);
+        etlongitud = dialog.findViewById(R.id.longitud);
 
         //lo trae al frente
         dialog.show();
@@ -161,10 +156,20 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 if(etlongitud.getText()!=null && etlatitud!=null){
                     Double lat = Double.valueOf(etlatitud.getText().toString());
                     Double lng = Double.valueOf(etlongitud.getText().toString());
-                    LatLng nuevo = new LatLng(lat, lng);
-                    mMap.addMarker(new MarkerOptions().position(nuevo).title("Marcador en " + lat + " latitud, " + lng + " longitud"));
+                    LatLng nuevo = new LatLng(lng, lat);
+                    posiciones.add(nuevo);
+                    mMap.addMarker(new MarkerOptions().position(nuevo).title("Marcador en " + lng + " longitud" + lat + " latitud"));
                     dialog.dismiss();
-                    Toast.makeText(MainActivity.this, "Marcador en " + lat + " latitud, " + lng + " longitud", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Marcador en " + lng + " longitud" + lat + " latitud" , Toast.LENGTH_SHORT).show();
+
+                    //Si añado más, se añadirá linea
+                    if(posiciones.size()>=2) {
+                        mMap.addPolyline(new PolylineOptions()
+                                .add(posiciones.get(posiciones.size() - 1), posiciones.get(posiciones.size() - 2))
+                                .color(Color.GREEN)
+                                .width(10f));
+                    }
+
                 }
             }
         });
@@ -184,12 +189,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         dialog.setContentView(R.layout.ejercicio3);
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
-        aceptar = dialog.findViewById(R.id.b_aceptar);
-        cancelar = dialog.findViewById(R.id.b_cancelar);
-        etdistancia = dialog.findViewById(R.id.et_distancia);
-        etrumbo = dialog.findViewById(R.id.et_rumbo);
-        Spinner spinner = (Spinner) findViewById(R.id.dir_rumbo);
+        aceptar = dialog.findViewById(R.id.aceptar);
+        cancelar = dialog.findViewById(R.id.cancelar);
+        etdistancia = dialog.findViewById(R.id.distancia);
 
+        etrumbo = dialog.findViewById(R.id.rumbo);
+        Spinner spinner = (Spinner) findViewById(R.id.dir_rumbo);
 
         //lo trae al frente
         dialog.show();
@@ -205,6 +210,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 previa = new LatLng(0, 0);
 
                 posiciones.add(ultima);
+                //en caso de que no hayan aún marcadores
                 if (ultima != null) {
 
                     dist = SphericalUtil.computeDistanceBetween(ultima, previa);
@@ -236,7 +242,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
 
-                //a android no le apetece cogerme el valor del spinner
+
                 /*
                 Spinner dirRumboSpinner =(Spinner)findViewById(R.id.dir_rumbo);
                 dirRumboSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

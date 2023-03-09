@@ -18,43 +18,41 @@
         android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="LONGITUD:"
+        android:text="Longitud:"
         android:textSize="20sp" />
 
     <EditText
-        android:id="@+id/et_distancia"
+        android:id="@+id/longitud"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="LONGITUD"
+        android:hint="Longitud"
         android:inputType="numberDecimal"
-        android:text="0"
+        android:text="53.499424"
         />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="LATITUD:"
+        android:text="Latitud:"
         android:textSize="20sp" />
 
     <EditText
-        android:id="@+id/et_rumbo"
+        android:id="@+id/latitud"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="LATITUD"
+        android:hint="Latitud"
         android:inputType="numberDecimal"
-        android:text="0"
+        android:text="1.873112"
         />
 
     <Button
         android:id="@+id/aceptar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FF8A80"
-        android:backgroundTint="#A13131"
-        android:backgroundTintMode="add"
+        android:backgroundTint="#89F9AA"
         android:text="aceptar"
         android:textColor="#FFEB3B" />
 
@@ -62,6 +60,7 @@
         android:id="@+id/cancelar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="#A13131"
         android:text="cancelar"
         android:textColor="#FFEB3B" />
 </LinearLayout>
