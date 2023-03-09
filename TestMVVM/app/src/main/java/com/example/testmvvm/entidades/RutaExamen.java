@@ -51,4 +51,13 @@ public class RutaExamen {
         this.rumbo = rumbo;
     }
 
+    @Override
+    public String toString() {
+        return "RutaExamen{" +
+                "longInicial=" + longInicial +
+                ", latInicial=" + latInicial +
+                ", rumbo='" + rumbo + '\'' +
+                ", distancia=" + distancia +
+                '}';
+    }
 }

@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModel;
 import com.example.testmvvm.DAO.DaoExamen;
 import com.example.testmvvm.entidades.Lugar;
 import com.example.testmvvm.entidades.Ruta;
+import com.example.testmvvm.entidades.RutaExamen;
 import com.example.testmvvm.room.ItinerarioBD;
 
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public class GalleryViewModel extends ViewModel {
     private final MutableLiveData<ArrayList<String>> nNombres;
 
     //datos room
-    private final MutableLiveData<ArrayList<Ruta>> DatosRoom;
+    private MutableLiveData<ArrayList<RutaExamen>> DatosRoom;
 
     private final MutableLiveData<String> mText;
 
@@ -33,7 +34,7 @@ public class GalleryViewModel extends ViewModel {
         nNombres.setValue(new ArrayList<String>());
 
         DatosRoom = new MutableLiveData<>();
-        DatosRoom.setValue(new ArrayList<Ruta>());
+        DatosRoom.setValue(new ArrayList<RutaExamen>());
 
         mText = new MutableLiveData<>();
         mText.setValue("This is gallery fragment");
@@ -42,15 +43,19 @@ public class GalleryViewModel extends ViewModel {
     public LiveData<String> getText() {
         return mText;
     }
-    public LiveData<ArrayList<String>> getNombres(){return nNombres;}
-    public LiveData<ArrayList<Ruta>> getRutas(){return DatosRoom;}
 
-    public void addNombre(String nombre){
+    public void setDatosRoom(MutableLiveData<ArrayList<RutaExamen>> Datos){
+        this.DatosRoom=Datos;
+    }
+    public LiveData<ArrayList<String>> getNombres(){return nNombres;}
+    public LiveData<ArrayList<RutaExamen>> getRutas(){return DatosRoom;}
+
+    public void addNombre(ArrayList<RutaExamen> nombre){
         //ArrayList<String> nombres=nNombres.getValue();
         //nombres.add(nombre);
-
-        nNombres.getValue().add(nombre);
-        nNombres.postValue(nNombres.getValue());
+        DatosRoom.setValue(nombre);
+        //nNombres.getValue().add(nombre);
+        //nNombres.postValue(nNombres.getValue());
     }
 
     public void saveNombres(Context context) {

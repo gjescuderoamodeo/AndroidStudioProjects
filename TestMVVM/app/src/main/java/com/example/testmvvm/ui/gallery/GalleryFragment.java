@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -91,10 +92,10 @@ public class GalleryFragment extends Fragment {
             public void onClick(View view) {
 
                 // Obtenemos los nombres desde el ViewModel
-                /*nombres = galleryViewModel.getNombres().getValue();
+                nombres = galleryViewModel.getNombres().getValue();
                 for (String s : nombres) {
                     Log.d("MVVM_", s);
-                }*/
+                }
 
                 //Log de rutas
                 getRutas();
@@ -144,9 +145,9 @@ public class GalleryFragment extends Fragment {
         super.onResume();
 
         // Observamos el LiveData del ViewModel para mostrar los cambios
-        galleryViewModel.getNombres().observe(this.getViewLifecycleOwner(), new Observer<ArrayList<String>>() {
+        galleryViewModel.getRutas().observe(this.getViewLifecycleOwner(), new Observer<ArrayList<RutaExamen>>() {
             @Override
-            public void onChanged(ArrayList<String> strings) {
+            public void onChanged(ArrayList<RutaExamen> strings) {
                 Log.d("MVVM_", "" + strings.toString());
 
                 // Guardamos los datos en SharedPreferences cuando se producen cambios en los nombres
@@ -172,13 +173,16 @@ public class GalleryFragment extends Fragment {
                 for (QueryDocumentSnapshot document : task.getResult()) {
                     RutaExamen ruta = document.toObject(RutaExamen.class);
                     rutas.add(ruta);
-                    Log.d("TAG", "Rutas: " + ruta.getAll());
+                    Log.d("TAG", "Rutas33: " + ruta.getAll());
                 }
+                galleryViewModel.addNombre((ArrayList<RutaExamen>) rutas);
                 //Log.d("TAG", "Rutas: " + rutas);
             } else {
                 Log.w("TAG", "Error getting documents.", task.getException());
             }
         });
+        //galleryViewModel.addNombre((ArrayList<RutaExamen>) rutas);
+        //Log.d("TAG", "Rutas: " + rutas);
 
     }
 
