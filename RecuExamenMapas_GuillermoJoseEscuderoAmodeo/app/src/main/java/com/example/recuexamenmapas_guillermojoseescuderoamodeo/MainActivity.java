@@ -216,14 +216,16 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     dist = SphericalUtil.computeDistanceBetween(ultima, previa);
                     dist /= 1000;
                     distanciaTotal += dist;
-                    rum=SphericalUtil.computeHeading(previa, ultima);
+
                     if (rum<0)rum+=360;
+
                     previa = ultima;
+                    ultima=SphericalUtil.computeOffset(previa,dist,rum);
                     MarkerOptions markerOptions = new MarkerOptions().position(ultima);
                     mMap.addMarker(markerOptions);
                     dialog.dismiss();
                     Toast.makeText(MainActivity.this, "Distancia: " + dist+ "Rumbo: "+rum, Toast.LENGTH_SHORT).show();
-
+                    posiciones.add(ultima);
                     //LatLng latLng3 = new LatLng(53.979900, -0.757300);
                     //LatLng latLng2 = new LatLng(40.7128, -74.0060);
 
